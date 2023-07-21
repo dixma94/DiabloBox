@@ -18,4 +18,5 @@ public class PlayerController : MonoBehaviour
     {
         agent.destination = point;
     }
+   
 }
