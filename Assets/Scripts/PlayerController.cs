@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private void Input_OnInteractableClick(IInteractable interactableObject, Vector3 point)
     {
         float distanceToInteract = 15f;
+        float distanceToStop = 3f;
         point.y = 0f;
         if (Vector3.Distance(transform.position,point)<=distanceToInteract)
         {
@@ -26,9 +27,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Input_OnEnvironmentClick(Vector3.MoveTowards(point, transform.position, 3f));
-
-
+            Input_OnEnvironmentClick(Vector3.MoveTowards(point, transform.position, distanceToStop));
         }
     }
 
