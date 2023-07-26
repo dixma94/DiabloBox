@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private MouseInput input;
+    [SerializeField] private NPCDialogUI nPCDialogUI;
+
+    private Vector3 NPCposition;
+    private IInteractable npc;
 
     private void Start()
     {
@@ -16,18 +20,20 @@ public class PlayerController : MonoBehaviour
         input.OnInteractableClick += Input_OnInteractableClick;
     }
 
-    private void Input_OnInteractableClick(IInteractable interactableObject, Vector3 point)
+    private void Input_OnInteractableClick(IInteractable interactableObject, Vector3 pointInteract)
     {
         float distanceToInteract = 15f;
         float distanceToStop = 3f;
-        point.y = 0f;
-        if (Vector3.Distance(transform.position,point)<=distanceToInteract)
+        NPCposition = pointInteract;
+        npc = interactableObject;
+        pointInteract.y = 0f;
+        if (Vector3.Distance(transform.position,pointInteract)<=distanceToInteract)
         {
-            interactableObject.Interact();
+            nPCDialogUI.Show("HI");
         }
         else
         {
-            Input_OnEnvironmentClick(Vector3.MoveTowards(point, transform.position, distanceToStop));
+            Input_OnEnvironmentClick(Vector3.MoveTowards(pointInteract, transform.position, distanceToStop));
         }
     }
 
@@ -48,6 +54,15 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        if (npc != null)
+        {
+            if(Vector3.Distance(NPCposition,transform.position)> interactRange)
+            {
+                nPCDialogUI.Hide();
+                npc = null;
+            }
+        }
+        
 
     }
 
