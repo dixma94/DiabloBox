@@ -14,11 +14,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 NPCposition;
     private IInteractable npc;
     float distanceToInteract = 10f;
+    public bool IsDialog;
 
     private void Start()
     {
         input.OnEnvironmentClick += Input_OnEnvironmentClick;
         input.OnInteractableClick += Input_OnInteractableClick;
+        IsDialog = false;
     }
 
     private void Input_OnInteractableClick(IInteractable interactableObject, Vector3 pointInteract)
@@ -28,19 +30,26 @@ public class PlayerController : MonoBehaviour
         NPCposition = pointInteract;
         npc = interactableObject;
         pointInteract.y = 0f;
-        if (Vector3.Distance(transform.position,pointInteract)<=distanceToInteract)
+        if (!IsDialog) 
         {
-            nPCDialogUI.Show(interactableObject.Interact());
+            if (Vector3.Distance(transform.position, pointInteract) <= distanceToInteract)
+            {
+                nPCDialogUI.EnterDialogueMode(interactableObject.Interact());
+            }
+            else
+            {
+                Input_OnEnvironmentClick(Vector3.MoveTowards(pointInteract, transform.position, distanceToStop));
+            }
         }
-        else
-        {
-            Input_OnEnvironmentClick(Vector3.MoveTowards(pointInteract, transform.position, distanceToStop));
-        }
+        
     }
 
     private void Input_OnEnvironmentClick(Vector3 point)
-    {
-        agent.destination = point;
+    {       
+        if (!IsDialog)
+        {
+            agent.destination = point;
+        }
     }
 
     private void Update()
@@ -55,14 +64,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if (npc != null)
-        {
-            if(Vector3.Distance(NPCposition,transform.position)> distanceToInteract)
-            {
-                nPCDialogUI.Hide();
-                npc = null;
-            }
-        }
+
         
 
     }

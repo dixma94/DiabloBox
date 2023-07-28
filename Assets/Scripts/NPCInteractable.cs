@@ -7,6 +7,7 @@ public class NPCInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string name;
     [SerializeField] private GameObject SelectedVisual;
+    [SerializeField] private TextAsset inkJSON;
 
 
     private void Start()
@@ -21,9 +22,9 @@ public class NPCInteractable : MonoBehaviour, IInteractable
         
     }
 
-    public string Interact()
+    public TextAsset Interact()
     {
-        return "Hi I'm "+name;
+        return inkJSON ;
     }
 
     private void Update()
