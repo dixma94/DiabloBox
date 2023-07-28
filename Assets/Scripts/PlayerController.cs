@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 NPCposition;
     private IInteractable npc;
+    float distanceToInteract = 10f;
 
     private void Start()
     {
@@ -22,14 +23,14 @@ public class PlayerController : MonoBehaviour
 
     private void Input_OnInteractableClick(IInteractable interactableObject, Vector3 pointInteract)
     {
-        float distanceToInteract = 15f;
-        float distanceToStop = 3f;
+        
+        float distanceToStop = 5f;
         NPCposition = pointInteract;
         npc = interactableObject;
         pointInteract.y = 0f;
         if (Vector3.Distance(transform.position,pointInteract)<=distanceToInteract)
         {
-            nPCDialogUI.Show("HI");
+            nPCDialogUI.Show(interactableObject.Interact());
         }
         else
         {
@@ -44,8 +45,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        float interactRange = 14f;
-        Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
+        
+        Collider[] colliderArray = Physics.OverlapSphere(transform.position, distanceToInteract);
         foreach (Collider collider in colliderArray)
         {
             if (collider.TryGetComponent(out IInteractable interactable))
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
         }
         if (npc != null)
         {
-            if(Vector3.Distance(NPCposition,transform.position)> interactRange)
+            if(Vector3.Distance(NPCposition,transform.position)> distanceToInteract)
             {
                 nPCDialogUI.Hide();
                 npc = null;

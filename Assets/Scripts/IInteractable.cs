@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IInteractable 
 {
     public void RotateToPlayer(PlayerController player);
-    public void Interact();
+    public string Interact();
 }
