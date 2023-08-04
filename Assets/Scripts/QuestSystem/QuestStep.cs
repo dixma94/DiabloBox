@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class QuestStep : MonoBehaviour
+public abstract class QuestStep: MonoBehaviour
 {
     private bool IsFinished = false;
-    private string questId;
+    protected string questId;
 
-    public void InitializeQuestStep(string questId)
+    public virtual void InitializeQuestStep(string questId)
     {
         this.questId = questId;
       
     }
-    protected void FinishedQuestStep()
+    public void FinishedQuestStep()
     {
         if (!IsFinished)
         {
             IsFinished = true;
             GameEventManager.instance.questEvents.AdvanceQuest(questId);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum NPC_Class
+{
+    Wizard,
+    Smitt
+}
 public class NPCInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject SelectedVisual;
-    [SerializeField] private TextAsset[] inkJSONArray;
+    public TextAsset defaultText;
     [SerializeField] private QuestInfoSO questInfo;
     [Header("Config")]
     [SerializeField] private bool startPoint = true;
     [SerializeField] private bool finishPoint = true;
     private string questId;
     private QuestState currentQuestState;
+    public NPC_Class NPC_Class;
+    public NPCDialogUI dialogUI;
+    
+   
+    public Queue<TextQUestStep> DialogueQueue = new Queue<TextQUestStep>();
 
     private void Awake()
     {
@@ -56,10 +66,24 @@ public class NPCInteractable : MonoBehaviour, IInteractable
         if (currentQuestState.Equals(QuestState.CAN_START) && startPoint)
         {
             GameEventManager.instance.questEvents.StartQuest(questId);
+            if (DialogueQueue.Count > 0)
+            {
+                TextQUestStep textQUestStep = DialogueQueue.Dequeue();
+                dialogUI.EnterDialogueMode(textQUestStep.questStep, textQUestStep.textAsset);
+            }
         }
         else if (currentQuestState.Equals(QuestState.CAN_FINISH) && finishPoint)
         {
             GameEventManager.instance.questEvents.FinishQuest(questId);
+        }
+        else if (DialogueQueue.Count > 0)
+        {
+                TextQUestStep textQUestStep = DialogueQueue.Dequeue();
+                dialogUI.EnterDialogueMode(textQUestStep.questStep, textQUestStep.textAsset);
+        }
+        else 
+        {
+            dialogUI.EnterDialogueMode(null, defaultText);
         }
     }
 
@@ -74,4 +98,5 @@ public class NPCInteractable : MonoBehaviour, IInteractable
         }    
     }
     
+   
 }

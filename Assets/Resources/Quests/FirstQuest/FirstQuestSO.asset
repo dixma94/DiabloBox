@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d6a3a82ec771004b8f4ac18e3ea0ec6, type: 3}
-  m_Name: CollectCoinsQuest
+  m_Name: FirstQuestSO
   m_EditorClassIdentifier: 
-  <id>k__BackingField: CollectCoinsQuest
-  displayName: Collect the Coins
-  levelRequirement: 1
+  <id>k__BackingField: FirstQuestSO
+  displayName: FirstQuest
   questPrerequisites: []
   questStepPrefabs:
-  - {fileID: 3388978218133047793, guid: f8195ee9ea9210b4a85daf67ee6387ba, type: 3}
-  goldReward: 50
-  experienceReward: 60
+  - {fileID: 2220773675517475666, guid: ffe93215151b47f45b028c210ac6fbbd, type: 3}
+  - {fileID: 2220773675517475666, guid: 5d0c539ff7c741349941948ec26e712d, type: 3}
+  - {fileID: 2220773675517475666, guid: ffe93215151b47f45b028c210ac6fbbd, type: 3}

@@ -20,6 +20,7 @@ public class NPCDialogUI : MonoBehaviour
     [SerializeField] private GameObject panelText = null;
     [SerializeField] private GameObject panelChoises = null;
     public Story story;
+    public bool IsPlaying;
     // Start is called before the first frame update
 
     void Awake()
@@ -28,12 +29,13 @@ public class NPCDialogUI : MonoBehaviour
         RemoveChildren();
         Hide();
     }
-    public void EnterDialogueMode(TextAsset textAsset)
+    public void EnterDialogueMode(QuestStep questStep, TextAsset textAsset)
     {
         Show();
         story = new Story(textAsset.text);
-
+        questStep?.FinishedQuestStep();
         RefreshView();
+        IsPlaying = true;
     }
 
 
@@ -52,6 +54,7 @@ public class NPCDialogUI : MonoBehaviour
     {
         playerController.IsDialog = false;
         Hide();
+        IsPlaying = false;
     }
 
     private IEnumerator SmoothText(string text, TextMeshProUGUI textMeshPro)

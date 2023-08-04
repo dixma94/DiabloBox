@@ -1,7 +1,7 @@
 
 ->main
 ===main===
-You need to complete Quest!
+Hi im Defualt text for Smitt
 +   [quit]
     ->END
     
