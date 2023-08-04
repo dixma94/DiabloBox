@@ -1,7 +1,7 @@
 
 ->main
 ===main===
-Hi! Do you want quest?
+You Complete Quest! #CompleteCurrentQuest
 +   [yes]
     ->questQuestion
 +   [quit]

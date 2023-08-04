@@ -1,3 +1,4 @@
+using Ink;
 using Ink.Runtime;
 using System;
 using System.Collections;
@@ -9,7 +10,9 @@ using UnityEngine.UI;
 
 public class NPCDialogUI : MonoBehaviour
 {
-    public static event Action<Story> OnCreateStory;
+    public static event Action OnAcceptQuest;
+
+    private const string ACCEPT_QUEST_TAG = "AcceptQuest";
 
     [SerializeField] private TextMeshProUGUI dialogueTextPrefab;
     [SerializeField] private PlayerController playerController;
@@ -29,7 +32,7 @@ public class NPCDialogUI : MonoBehaviour
     {
         Show();
         story = new Story(textAsset.text);
-        if (OnCreateStory != null) OnCreateStory(story);
+
         RefreshView();
     }
 
@@ -76,6 +79,9 @@ public class NPCDialogUI : MonoBehaviour
             text = text.Trim();
             // Display the text on screen!
             CreateContentView(text);
+
+
+            
         }
 
         // Display all the choices, if there are any!

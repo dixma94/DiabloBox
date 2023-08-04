@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, pointInteract) <= distanceToInteract)
             {
-                nPCDialogUI.EnterDialogueMode(interactableObject.Interact());
+                interactableObject.Interact();
             }
             else
             {
