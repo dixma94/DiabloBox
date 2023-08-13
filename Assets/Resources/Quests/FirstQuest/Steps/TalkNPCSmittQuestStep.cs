@@ -11,7 +11,7 @@ public class TalkNPCSmittQuestStep : QuestStep
     {
         base.questId = questId;
         NPCInteractable nPC = NPC_Manager.GetNpc(NPC_Class.Smitt);
-        nPC.DialogueQueue.Enqueue(new TextQUestStep() { questStep = this, textAsset = text });
+        nPC.QuestTextQueue.Enqueue(new TextQuestStep() { questStep = this, textAsset = text });
 
     }
 }

@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-public class TextQUestStep 
+public class TextQuestStep 
 {
     public QuestStep questStep;
     public TextAsset textAsset;

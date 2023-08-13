@@ -14,15 +14,12 @@ public class QuestManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        GameEventManager.instance.questEvents.onStartQuest += StartQuest;
         GameEventManager.instance.questEvents.onAdvanceQuest += AdvanceQuest;
-        GameEventManager.instance.questEvents.onFinishQuest += FinishQuest;
+
     }
     private void OnDisable()
     {
-        GameEventManager.instance.questEvents.onStartQuest -= StartQuest;
         GameEventManager.instance.questEvents.onAdvanceQuest -= AdvanceQuest;
-        GameEventManager.instance.questEvents.onFinishQuest -= FinishQuest;
     }
     private void ChangeQuestState(string id, QuestState state)
     {
@@ -30,12 +27,7 @@ public class QuestManager : MonoBehaviour
         quest.state = state;
         GameEventManager.instance.questEvents.QuestStateChange(quest);
     }
-    private void StartQuest(string id)
-    {
-        Quest quest = GetQuestById(id);
-        quest.InstantiateCurrentQuestStep(this.transform);
-        ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
-    }
+
 
     private void AdvanceQuest(string id)
     {
@@ -52,16 +44,12 @@ public class QuestManager : MonoBehaviour
         // if there are no more steps, then we've finished all of them for this quest
         else
         {
-            ChangeQuestState(quest.info.id, QuestState.CAN_FINISH);
+            ChangeQuestState(quest.info.id, QuestState.FINISHED);
+            Debug.Log("Finish");
         }
     }
 
-    private void FinishQuest(string id)
-    {
-        Quest quest = GetQuestById(id);
-        ChangeQuestState(quest.info.id, QuestState.FINISHED);
-        Debug.Log("Finish");
-    }
+
     private void Start()
     {
 
@@ -96,7 +84,8 @@ public class QuestManager : MonoBehaviour
             // if we're now meeting the requirements, switch over to the CAN_START state
             if (quest.state == QuestState.REQUIREMENTS_NOT_MET && CheckRequirementsMet(quest))
             {
-                ChangeQuestState(quest.info.id, QuestState.CAN_START);
+                quest.InstantiateCurrentQuestStep(this.transform);
+                ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
             }
         }
     }

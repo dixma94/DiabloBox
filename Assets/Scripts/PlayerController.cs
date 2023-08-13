@@ -54,7 +54,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
+        RotateNpcToPlayer();
+
+    }
+
+    private void RotateNpcToPlayer()
+    {
         Collider[] colliderArray = Physics.OverlapSphere(transform.position, distanceToInteract);
         foreach (Collider collider in colliderArray)
         {
@@ -64,9 +69,5 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-
-        
-
     }
-
 }

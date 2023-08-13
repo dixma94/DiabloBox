@@ -12,6 +12,7 @@ public abstract class QuestStep: MonoBehaviour
         this.questId = questId;
       
     }
+    [ContextMenu("FinishedQuestStep")]
     public void FinishedQuestStep()
     {
         if (!IsFinished)

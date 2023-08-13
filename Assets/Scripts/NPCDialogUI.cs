@@ -37,6 +37,13 @@ public class NPCDialogUI : MonoBehaviour
         RefreshView();
         IsPlaying = true;
     }
+    public void EnterDialogueMode( TextAsset textAsset)
+    {
+        Show();
+        story = new Story(textAsset.text);
+        RefreshView();
+        IsPlaying = true;
+    }
 
 
     public void Show()

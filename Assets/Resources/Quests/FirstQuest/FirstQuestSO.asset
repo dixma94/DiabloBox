@@ -18,4 +18,5 @@ MonoBehaviour:
   questStepPrefabs:
   - {fileID: 2220773675517475666, guid: ffe93215151b47f45b028c210ac6fbbd, type: 3}
   - {fileID: 2220773675517475666, guid: 5d0c539ff7c741349941948ec26e712d, type: 3}
-  - {fileID: 2220773675517475666, guid: ffe93215151b47f45b028c210ac6fbbd, type: 3}
+  - {fileID: 2220773675517475666, guid: 525df04df91f02f4087d8bd8b811e48e, type: 3}
+  - {fileID: 2220773675517475666, guid: 98da7ac883595ae4599c9f26f27848b2, type: 3}

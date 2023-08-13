@@ -12,41 +12,15 @@ public class NPCInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject SelectedVisual;
     public TextAsset defaultText;
-    [SerializeField] private QuestInfoSO questInfo;
+
     [Header("Config")]
-    [SerializeField] private bool startPoint = true;
-    [SerializeField] private bool finishPoint = true;
-    private string questId;
-    private QuestState currentQuestState;
     public NPC_Class NPC_Class;
     public NPCDialogUI dialogUI;
     
    
-    public Queue<TextQUestStep> DialogueQueue = new Queue<TextQUestStep>();
-
-    private void Awake()
-    {
-        questId = questInfo.id;
-    }
-    private void OnEnable()
-    {
-        GameEventManager.instance.questEvents.onQuestStateChange += QuestStateChange;
-    }
+    public Queue<TextQuestStep> QuestTextQueue = new Queue<TextQuestStep>();
 
 
-    private void OnDisable()
-    {
-        GameEventManager.instance.questEvents.onQuestStateChange -= QuestStateChange;
-    }
-    private void QuestStateChange(Quest quest)
-    {
-        // only update the quest state if this point has the corresponding quest
-        if (quest.info.id.Equals(questId))
-        {
-            currentQuestState = quest.state;
-            //questIcon.SetState(currentQuestState, startPoint, finishPoint);
-        }
-    }
 
     private void Start()
     {
@@ -62,28 +36,16 @@ public class NPCInteractable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        // start or finish a quest
-        if (currentQuestState.Equals(QuestState.CAN_START) && startPoint)
+
+        if (QuestTextQueue.Count > 0)
         {
-            GameEventManager.instance.questEvents.StartQuest(questId);
-            if (DialogueQueue.Count > 0)
-            {
-                TextQUestStep textQUestStep = DialogueQueue.Dequeue();
-                dialogUI.EnterDialogueMode(textQUestStep.questStep, textQUestStep.textAsset);
-            }
+            TextQuestStep textQUestStep = QuestTextQueue.Dequeue();
+            dialogUI.EnterDialogueMode(textQUestStep.questStep, textQUestStep.textAsset);
         }
-        else if (currentQuestState.Equals(QuestState.CAN_FINISH) && finishPoint)
-        {
-            GameEventManager.instance.questEvents.FinishQuest(questId);
-        }
-        else if (DialogueQueue.Count > 0)
-        {
-                TextQUestStep textQUestStep = DialogueQueue.Dequeue();
-                dialogUI.EnterDialogueMode(textQUestStep.questStep, textQUestStep.textAsset);
-        }
+        
         else 
         {
-            dialogUI.EnterDialogueMode(null, defaultText);
+            dialogUI.EnterDialogueMode(defaultText);
         }
     }
 

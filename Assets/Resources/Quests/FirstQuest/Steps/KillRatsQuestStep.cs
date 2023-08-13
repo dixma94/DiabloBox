@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum QuestState 
+public class KillRatsQuestStep : QuestStep
 {
-    REQUIREMENTS_NOT_MET,
-    IN_PROGRESS,
-    FINISHED
+   
 }

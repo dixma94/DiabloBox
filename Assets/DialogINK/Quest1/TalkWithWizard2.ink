@@ -1,11 +1,9 @@
 
 ->main
 ===main===
-Go Away!
+
+You complete quest!
+
 +   [quit]
     ->END
     
-
-===exit===
-    +   [quit]
-    ->END

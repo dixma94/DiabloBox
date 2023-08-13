@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9110722668030329140}
   - component: {fileID: 7161291117020936193}
   m_Layer: 0
-  m_Name: TalkNPCWizardQuestStep
+  m_Name: TalkWizardStep2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2497f91381e7c8e41a8de0a1efb493f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 4900000, guid: 8767051817c66c94b90c4148c9ce9653, type: 3}
+  text: {fileID: 4900000, guid: c589315ded77aed409e20ecda6c2b569, type: 3}

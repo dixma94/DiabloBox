@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9110722668030329140}
-  - component: {fileID: -3708801044733795863}
+  - component: {fileID: 7161291117020936193}
   m_Layer: 0
-  m_Name: TalkWithSmitt
+  m_Name: TalkWizardStep1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3708801044733795863
+--- !u!114 &7161291117020936193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2220773675517475666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33aa20681617688499333776d17c2c58, type: 3}
+  m_Script: {fileID: 11500000, guid: 2497f91381e7c8e41a8de0a1efb493f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 4900000, guid: 8bdbcf0654daa174c8442ce52e9520b4, type: 3}
+  text: {fileID: 4900000, guid: 02d688597f8e03249bedd3431dd7621b, type: 3}
