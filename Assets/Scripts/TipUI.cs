@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class SelectedBox : MonoBehaviour
+public class TipUI : MonoBehaviour
 {
     [SerializeField] private MouseInput mouseInput;
-    [SerializeField] private SelectableObject npc;
+    [SerializeField] private TextMeshProUGUI textMeshPro;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,20 +16,16 @@ public class SelectedBox : MonoBehaviour
 
     private void MouseInput_OnIntercableObjectChanged(object sender, MouseInput.OnIntercableObjectChangedEventArgs e)
     {
-        if (e.interactableObject==npc as SelectableObject)
+        if (e.interactableObject != null)
         {
+            textMeshPro.text = e.interactableObject.info;
             gameObject.SetActive(true);
+
         }
         else
         {
             gameObject.SetActive(false);
         }
-    
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

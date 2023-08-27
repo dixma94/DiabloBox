@@ -8,33 +8,29 @@ public enum NPC_Class
     Wizard,
     Smitt
 }
-public class NPCInteractable : MonoBehaviour, IInteractable
+public class NPCInteractable : SelectableObject
 {
-    [SerializeField] private GameObject SelectedVisual;
+
     public TextAsset defaultText;
 
     [Header("Config")]
     public NPC_Class NPC_Class;
     public NPCDialogUI dialogUI;
-    
+
    
     public Queue<TextQuestStep> QuestTextQueue = new Queue<TextQuestStep>();
 
 
 
-    private void Start()
-    {
-        SelectedVisual.SetActive(false);
-    }
 
     private PlayerController player;
-    public void RotateToPlayer(PlayerController player)
+    public override void RotateToPlayer(PlayerController player)
     {
         this.player = player;
         
     }
 
-    public void Interact()
+    public override void Interact()
     {
 
         if (QuestTextQueue.Count > 0)

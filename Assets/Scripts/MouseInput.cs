@@ -6,11 +6,11 @@ using UnityEngine;
 public class MouseInput : MonoBehaviour
 {
     public event Action<Vector3> OnEnvironmentClick;
-    public event Action<IInteractable, Vector3> OnInteractableClick;
+    public event Action<SelectableObject, Vector3> OnInteractableClick;
     public event EventHandler<OnIntercableObjectChangedEventArgs> OnIntercableObjectChanged;
     public class OnIntercableObjectChangedEventArgs : EventArgs
     {
-        public IInteractable interactableObject;
+        public SelectableObject interactableObject;
     }
 
 
@@ -20,7 +20,7 @@ public class MouseInput : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
-            if (hit.collider.TryGetComponent(out IInteractable interactable))
+            if (hit.collider.TryGetComponent(out SelectableObject interactable))
             {
                 OnIntercableObjectChanged?.Invoke(this, new OnIntercableObjectChangedEventArgs()
                 {
@@ -41,7 +41,7 @@ public class MouseInput : MonoBehaviour
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
             {
-                if (hit.collider.TryGetComponent(out IInteractable interactable))
+                if (hit.collider.TryGetComponent(out SelectableObject interactable))
                 {
                     OnInteractableClick?.Invoke(interactable, hit.point);
                     return;
