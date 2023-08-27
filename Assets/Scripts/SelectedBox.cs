@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class SelectedBox : MonoBehaviour
 {
-    [SerializeField] private MouseInput mouseInput;
     [SerializeField] private SelectableObject npc;
     // Start is called before the first frame update
     void Start()
     {
-        mouseInput.OnIntercableObjectChanged += MouseInput_OnIntercableObjectChanged;
+       MouseInput.instance.OnIntercableObjectChanged += MouseInput_OnIntercableObjectChanged;
+    }
+    private void OnDestroy()
+    {
+        MouseInput.instance.OnIntercableObjectChanged -= MouseInput_OnIntercableObjectChanged;
     }
 
     private void MouseInput_OnIntercableObjectChanged(object sender, MouseInput.OnIntercableObjectChangedEventArgs e)
     {
-        if (e.interactableObject==npc as SelectableObject)
+        if (e.interactableObject==npc )
         {
             gameObject.SetActive(true);
         }

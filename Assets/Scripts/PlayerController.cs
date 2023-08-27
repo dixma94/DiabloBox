@@ -63,9 +63,9 @@ public class PlayerController : MonoBehaviour
         Collider[] colliderArray = Physics.OverlapSphere(transform.position, distanceToInteract);
         foreach (Collider collider in colliderArray)
         {
-            if (collider.TryGetComponent(out IInteractable interactable))
+            if (collider.TryGetComponent(out NPCInteractable npc))
             {
-                interactable.RotateToPlayer(this);
+                npc.RotateToPlayer(this);
             }
 
         }
