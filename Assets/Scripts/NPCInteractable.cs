@@ -16,8 +16,8 @@ public class NPCInteractable : SelectableObject
     [Header("Config")]
     public NPC_Class NPC_Class;
     public NPCDialogUI dialogUI;
+    public GameObject questHint;
 
-   
     public Queue<TextQuestStep> QuestTextQueue = new Queue<TextQuestStep>();
 
 
@@ -53,7 +53,14 @@ public class NPCInteractable : SelectableObject
         {
             var targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
-        }    
+            if (QuestTextQueue.Count > 0)
+            {
+                questHint.SetActive(true);
+            }
+            else { questHint.SetActive(false); }
+        }
+        else { questHint.SetActive(false); }
+
     }
     
    
