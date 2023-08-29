@@ -37,7 +37,7 @@ public class NPCDialogUI : MonoBehaviour
         RefreshView();
         IsPlaying = true;
     }
-    public void EnterDialogueMode( TextAsset textAsset)
+    public void EnterDialogueMode(TextAsset textAsset)
     {
         Show();
         story = new Story(textAsset.text);
@@ -46,12 +46,12 @@ public class NPCDialogUI : MonoBehaviour
     }
 
 
-    public void Show()
+    private void Show()
     {
         gameObject.SetActive(true);
         playerController.IsDialog = true;
     }
-    public void Hide()
+    private void Hide()
     {
         gameObject.SetActive(false);
         
@@ -75,7 +75,7 @@ public class NPCDialogUI : MonoBehaviour
        
     }
 
-    void RefreshView()
+    private void RefreshView()
     {
         // Remove all the UI on screen
         RemoveChildren();
@@ -114,7 +114,7 @@ public class NPCDialogUI : MonoBehaviour
         }
     }
     // Destroys all the children of this gameobject (all the UI)
-    void RemoveChildren()
+    private void RemoveChildren()
     {
         int childCount = panelText.transform.childCount;
         for (int i = childCount - 1; i >= 0; --i)
@@ -140,13 +140,13 @@ public class NPCDialogUI : MonoBehaviour
 
         return choice;
     }
-    void OnClickChoiceButton(Choice choice)
+    private void OnClickChoiceButton(Choice choice)
     {
         story.ChooseChoiceIndex(choice.index);
         RefreshView();
     }
     // Creates a textbox showing the the line of text
-    void CreateContentView(string text)
+    private void CreateContentView(string text)
     {
         TextMeshProUGUI storyText = Instantiate(dialogueTextPrefab) as TextMeshProUGUI;
         StartCoroutine(SmoothText(text, storyText));
