@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8897766914716595027}
   - component: {fileID: 8897766914716595026}
   - component: {fileID: 8897766914716595024}
+  - component: {fileID: 1643654403308343697}
   m_Layer: 0
   m_Name: Rat
   m_TagString: Untagged
@@ -61,6 +62,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: RatBox
+  battleStats: {fileID: 1643654403308343697}
+--- !u!114 &1643654403308343697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8897766914716595028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcbd3dc30e17fe44896c0780110bf958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heath: 10
+  mana: 0
+  distanceToAttack: 0
+  damage: 0
 --- !u!1001 &8897766914037524952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139,8 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0ea3bcd0933824bb3b9eb0c9e4d864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseInput: {fileID: 0}
-  npc: {fileID: 8897766914716595024}
+  selectableObject: {fileID: 0}
 --- !u!4 &9003133951490084403 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b7e84131213b22f4fa9d26b2bca76a68, type: 3}

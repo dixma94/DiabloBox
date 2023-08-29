@@ -1,32 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.AI;
 
-public class PlayerController : MonoBehaviour
+using System;
+using UnityEngine;
+
+public partial class PlayerController : MonoBehaviour
 {
-    [SerializeField] private NavMeshAgent agent;
+
     [SerializeField] private MouseInput input;
     [SerializeField] private NPCDialogUI nPCDialogUI;
+    [SerializeField] private PlayerMover mover;
+    [SerializeField] private BattleComponent battleComponent;
 
+    public ObjectBattleStats battleStats;
 
     float distanceToInteract = 10f;
     public bool IsDialog;
 
     private void Start()
     {
-        input.OnEnvironmentClick += Input_OnEnvironmentClick;
-        input.OnObjectClick += Input_OnInteractableClick;
+
+        input.OnObjectClick += InteractWithObject;
+        input.OnAttackableClick += AttackObject; ;
         IsDialog = false;
     }
 
-    private void Input_OnInteractableClick(IInteractable interactableObject, Vector3 pointInteract)
+    private void AttackObject(IDamageble damageble, Vector3 pointAttack)
     {
+
+        if (Vector3.Distance(transform.position, pointAttack) <= battleStats.distanceToAttack+1f)
+        {
+            battleComponent.AttackObject(damageble);
+        }
+        else
+        {
+            mover.MoveToPoint(Vector3.MoveTowards(pointAttack, transform.position, battleStats.distanceToAttack));
+        }
         
+    }
+
+    private void InteractWithObject(IInteractable interactableObject, Vector3 pointInteract)
+    {   
         float distanceToStop = 5f;
-        pointInteract.y = 0f;
 
         if (!IsDialog) 
         {
@@ -36,19 +49,12 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Input_OnEnvironmentClick(Vector3.MoveTowards(pointInteract, transform.position, distanceToStop));
+               mover.MoveToPoint(Vector3.MoveTowards(pointInteract, transform.position, distanceToStop));
             }
         }
         
     }
 
-    private void Input_OnEnvironmentClick(Vector3 point)
-    {       
-        if (!IsDialog)
-        {
-            agent.destination = point;
-        }
-    }
 
-   
 }
+

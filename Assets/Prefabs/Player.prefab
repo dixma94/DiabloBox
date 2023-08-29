@@ -109,6 +109,9 @@ GameObject:
   - component: {fileID: 3540764018055180583}
   - component: {fileID: 3540764018254170015}
   - component: {fileID: 3656933114671988938}
+  - component: {fileID: 7583712035214768939}
+  - component: {fileID: 8782674633554580506}
+  - component: {fileID: 3099910070251602702}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -145,9 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872836b7330a41d4fbee6f7e49a7da8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 3540764018254170015}
   input: {fileID: 0}
   nPCDialogUI: {fileID: 0}
+  mover: {fileID: 0}
+  battleComponent: {fileID: 0}
+  battleStats: {fileID: 0}
   IsDialog: 0
 --- !u!195 &3540764018254170015
 NavMeshAgent:
@@ -184,6 +189,49 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1370544, y: 2.5296729, z: 2.3085861}
   m_Center: {x: -0.019708633, y: 0.7648369, z: 0.06277084}
+--- !u!114 &7583712035214768939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540764018254170014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98bda2c8e6fed8e42819fc632e4c2e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 3540764018254170015}
+  input: {fileID: 0}
+--- !u!114 &8782674633554580506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540764018254170014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a224803ceeea1954cb059771fdcedd25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleStats: {fileID: 3099910070251602702}
+--- !u!114 &3099910070251602702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540764018254170014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcbd3dc30e17fe44896c0780110bf958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heath: 20
+  mana: 20
+  distanceToAttack: 3
+  damage: 5
 --- !u!1 &3540764018651731110
 GameObject:
   m_ObjectHideFlags: 0

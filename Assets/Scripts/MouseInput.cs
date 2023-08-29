@@ -7,6 +7,7 @@ public class MouseInput : MonoBehaviour, ImouseService
 {
     public event Action<Vector3> OnEnvironmentClick;
     public event Action<IInteractable, Vector3> OnObjectClick;
+    public event Action<IDamageble, Vector3> OnAttackableClick;
     public event Action<SelectableObject> OnObjectChanged;
 
     public static MouseInput instance { get; private set; }
@@ -39,6 +40,10 @@ public class MouseInput : MonoBehaviour, ImouseService
                 if (hit.collider.TryGetComponent(out IInteractable interactable))
                 {
                     OnObjectClick?.Invoke(interactable, hit.point);
+                }
+                else if(hit.collider.TryGetComponent(out IDamageble attackable))
+                {
+                    OnAttackableClick?.Invoke(attackable, hit.point);
                 }
                 else
                 {

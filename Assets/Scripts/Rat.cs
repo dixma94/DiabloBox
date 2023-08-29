@@ -1,12 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rat : SelectableObject, IInteractable
+public class Rat : SelectableObject, IDamageble
 {
-    public void Interact()
+    public ObjectBattleStats battleStats;
+
+    public void TakeDamage(int damage)
     {
-        GameEventManager.instance.ratsEvents.RatKilled();
-        Destroy(gameObject);
+        battleStats.heath-=damage;
+        if (battleStats.heath <= 0)
+        {
+
+            GameEventManager.instance.ratsEvents.RatKilled();
+            Destroy(gameObject);
+        }
     }
 }
