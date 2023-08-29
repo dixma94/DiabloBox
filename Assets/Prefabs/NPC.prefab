@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0ea3bcd0933824bb3b9eb0c9e4d864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 3516283214251444100}
+  selectableObject: {fileID: 3516283214251444100}
 --- !u!1 &3516283215236608262
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,10 +352,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: WizardBox
-  defaultText: {fileID: 4900000, guid: 8122724e3e2f90e409cec9fe1d25390a, type: 3}
-  NPC_Class: 0
-  dialogUI: {fileID: 0}
   questHint: {fileID: 3516283215968446688}
+  dialogUI: {fileID: 0}
+  defaultText: {fileID: 4900000, guid: 8122724e3e2f90e409cec9fe1d25390a, type: 3}
+  NPCType: 0
 --- !u!65 &3516283215826413285
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rat : SelectableObject
+public class Rat : SelectableObject, IInteractable
 {
-    public override void Interact()
+    public void Interact()
     {
         GameEventManager.instance.ratsEvents.RatKilled();
         Destroy(gameObject);

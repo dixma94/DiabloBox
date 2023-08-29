@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         input.OnEnvironmentClick += Input_OnEnvironmentClick;
-        input.OnInteractableClick += Input_OnInteractableClick;
+        input.OnObjectClick += Input_OnInteractableClick;
         IsDialog = false;
     }
 

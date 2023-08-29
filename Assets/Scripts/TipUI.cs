@@ -11,7 +11,7 @@ public class TipUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mouseInput.OnIntercableObjectChanged += MouseInput_OnIntercableObjectChanged;
+        mouseInput.OnObjectChanged += MouseInput_OnIntercableObjectChanged;
     }
 
     private void MouseInput_OnIntercableObjectChanged(SelectableObject selectableObject)

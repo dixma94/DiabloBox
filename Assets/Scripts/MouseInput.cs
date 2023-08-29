@@ -6,8 +6,8 @@ using UnityEngine;
 public class MouseInput : MonoBehaviour, ImouseService
 {
     public event Action<Vector3> OnEnvironmentClick;
-    public event Action<SelectableObject, Vector3> OnInteractableClick;
-    public event Action<SelectableObject> OnIntercableObjectChanged;
+    public event Action<IInteractable, Vector3> OnObjectClick;
+    public event Action<SelectableObject> OnObjectChanged;
 
     public static MouseInput instance { get; private set; }
     private void Awake()
@@ -25,20 +25,20 @@ public class MouseInput : MonoBehaviour, ImouseService
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
-            if (hit.collider.TryGetComponent(out SelectableObject interactable))
+            if (hit.collider.TryGetComponent(out SelectableObject selectable))
             {
-                OnIntercableObjectChanged?.Invoke(interactable);
+                OnObjectChanged?.Invoke(selectable);
             }
             else
             {
-                OnIntercableObjectChanged?.Invoke(null);
+                OnObjectChanged?.Invoke(null);
             }
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.TryGetComponent(out interactable))
+                if (hit.collider.TryGetComponent(out IInteractable interactable))
                 {
-                    OnInteractableClick?.Invoke(interactable, hit.point);
+                    OnObjectClick?.Invoke(interactable, hit.point);
                 }
                 else
                 {

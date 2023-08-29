@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class NPC : SelectableObject
+public class NPC : SelectableObject, IInteractable
 {
 
     [SerializeField] private GameObject questHint;
@@ -14,7 +14,7 @@ public class NPC : SelectableObject
 
     public Queue<TextQuestStep> QuestTextQueue = new Queue<TextQuestStep>();
 
-    public override void Interact()
+    public void Interact()
     {
 
         if (QuestTextQueue.Count > 0)
