@@ -14,11 +14,11 @@ public class TipUI : MonoBehaviour
         mouseInput.OnIntercableObjectChanged += MouseInput_OnIntercableObjectChanged;
     }
 
-    private void MouseInput_OnIntercableObjectChanged(object sender, MouseInput.OnIntercableObjectChangedEventArgs e)
+    private void MouseInput_OnIntercableObjectChanged(SelectableObject selectableObject)
     {
-        if (e.interactableObject != null)
+        if (selectableObject != null)
         {
-            textMeshPro.text = e.interactableObject.info;
+            textMeshPro.text = selectableObject.info;
             gameObject.SetActive(true);
 
         }

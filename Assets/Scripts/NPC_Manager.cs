@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class NPC_Manager : MonoBehaviour
 {
-    [SerializeField] private NPCInteractable[] NpcArray;
+    [SerializeField] private NPC[] NpcArray;
 
     static NPC_Manager instance;
 
@@ -14,10 +14,10 @@ public class NPC_Manager : MonoBehaviour
         instance = this; 
     }
 
-    public static NPCInteractable GetNpc(NPC_Class npcClass)
+    public static NPC GetNpc(NPCType npcClass)
     {
        
-        return instance.NpcArray.FirstOrDefault(npc => npc.NPC_Class == npcClass);
+        return instance.NpcArray.FirstOrDefault(npc => npc.NPCType == npcClass);
        
     }
 }

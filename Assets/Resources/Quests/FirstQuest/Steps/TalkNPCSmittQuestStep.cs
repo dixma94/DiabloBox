@@ -10,7 +10,7 @@ public class TalkNPCSmittQuestStep : QuestStep
     public override void InitializeQuestStep(string questId)
     {
         base.questId = questId;
-        NPCInteractable nPC = NPC_Manager.GetNpc(NPC_Class.Smitt);
+        NPC nPC = NPC_Manager.GetNpc(NPCType.Smith);
         nPC.QuestTextQueue.Enqueue(new TextQuestStep() { questStep = this, textAsset = text });
 
     }

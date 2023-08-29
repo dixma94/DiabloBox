@@ -11,8 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private MouseInput input;
     [SerializeField] private NPCDialogUI nPCDialogUI;
 
-    private Vector3 NPCposition;
-    private IInteractable npc;
+
     float distanceToInteract = 10f;
     public bool IsDialog;
 
@@ -27,9 +26,8 @@ public class PlayerController : MonoBehaviour
     {
         
         float distanceToStop = 5f;
-        NPCposition = pointInteract;
-        npc = interactableObject;
         pointInteract.y = 0f;
+
         if (!IsDialog) 
         {
             if (Vector3.Distance(transform.position, pointInteract) <= distanceToInteract)
@@ -54,20 +52,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        RotateNpcToPlayer();
-
+       
     }
 
-    private void RotateNpcToPlayer()
-    {
-        Collider[] colliderArray = Physics.OverlapSphere(transform.position, distanceToInteract);
-        foreach (Collider collider in colliderArray)
-        {
-            if (collider.TryGetComponent(out NPCInteractable npc))
-            {
-                npc.RotateToPlayer(this);
-            }
-
-        }
-    }
+   
 }

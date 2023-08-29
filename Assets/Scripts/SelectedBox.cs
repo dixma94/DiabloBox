@@ -15,9 +15,9 @@ public class SelectedBox : MonoBehaviour
         MouseInput.instance.OnIntercableObjectChanged -= MouseInput_OnIntercableObjectChanged;
     }
 
-    private void MouseInput_OnIntercableObjectChanged(object sender, MouseInput.OnIntercableObjectChangedEventArgs e)
+    private void MouseInput_OnIntercableObjectChanged(SelectableObject selectableObject)
     {
-        if (e.interactableObject==npc )
+        if (selectableObject == npc )
         {
             gameObject.SetActive(true);
         }
@@ -26,11 +26,5 @@ public class SelectedBox : MonoBehaviour
             gameObject.SetActive(false);
         }
     
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
