@@ -31,10 +31,7 @@ public class MouseInput : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out SelectableObject interactable))
             {
-                OnIntercableObjectChanged?.Invoke(this, new OnIntercableObjectChangedEventArgs()
-                {
-                    interactableObject = interactable
-                }) ;
+                ChangeSelect(interactable);
             }
             else
             {
@@ -60,5 +57,13 @@ public class MouseInput : MonoBehaviour
         }
 
        
+    }
+
+    private void ChangeSelect(SelectableObject interactable)
+    {
+        OnIntercableObjectChanged?.Invoke(this, new OnIntercableObjectChangedEventArgs()
+        {
+            interactableObject = interactable
+        });
     }
 }

@@ -6,5 +6,6 @@ using UnityEngine;
 public interface ImouseService 
 {
     event Action<Vector3> OnEnvironmentClick;
-    event Action<IInteractable,Vector3> OnInteractableClick;
+    event Action<SelectableObject, Vector3> OnInteractableClick;
+    event Action<SelectableObject> OnIntercableObjectChanged;
 }
