@@ -12,8 +12,13 @@ public class NPC : SelectableObject, IInteractable
     public TextAsset defaultText;
     public NPCType NPCType;
 
-    public Queue<TextQuestStep> QuestTextQueue = new Queue<TextQuestStep>();
-
+    public Queue<TextQuestStep> QuestTextQueue = new Queue<TextQuestStep>();   
+    
+    public Vector3 GetPoint()
+    {
+        return transform.position; 
+    }
+    
     public void Interact()
     {
 

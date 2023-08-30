@@ -7,6 +7,11 @@ public class Rat : SelectableObject, IDamageble
 {
     public ObjectBattleStats battleStats;
 
+    public Vector3 GetPoint()
+    {
+        return transform.position;
+    }
+
     public void TakeDamage(int damage)
     {
         battleStats.heath-=damage;

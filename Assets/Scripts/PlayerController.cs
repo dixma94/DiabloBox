@@ -23,26 +23,30 @@ public partial class PlayerController : MonoBehaviour
         IsDialog = false;
     }
 
-    private void AttackObject(IDamageble damageble, Vector3 pointAttack)
+    private void AttackObject(IDamageble damageble)
     {
 
-        if (Vector3.Distance(transform.position, pointAttack) <= battleStats.distanceToAttack+1f)
+        Vector3 pointAttack = damageble.GetPoint();
+        float distance = Vector3.Distance(transform.position, pointAttack);
+        float moveShift = 0.1f;
+        if (distance <= battleStats.distanceToAttack)
         {
             battleComponent.AttackObject(damageble);
         }
         else
         {
-            mover.MoveToPoint(Vector3.MoveTowards(pointAttack, transform.position, battleStats.distanceToAttack));
+            mover.MoveToPoint(Vector3.MoveTowards(pointAttack, transform.position, battleStats.distanceToAttack -moveShift));
         }
         
     }
 
-    private void InteractWithObject(IInteractable interactableObject, Vector3 pointInteract)
+    private void InteractWithObject(IInteractable interactableObject)
     {   
         float distanceToStop = 5f;
 
         if (!IsDialog) 
         {
+            Vector3 pointInteract = interactableObject.GetPoint();
             if (Vector3.Distance(transform.position, pointInteract) <= distanceToInteract)
             {
                 interactableObject.Interact();
