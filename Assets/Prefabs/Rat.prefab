@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0ea3bcd0933824bb3b9eb0c9e4d864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectableObject: {fileID: 0}
+  selectableObject: {fileID: 8897766914716595024}
 --- !u!4 &9003133951490084403 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b7e84131213b22f4fa9d26b2bca76a68, type: 3}

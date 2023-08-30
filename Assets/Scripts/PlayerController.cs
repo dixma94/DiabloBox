@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
@@ -25,40 +26,45 @@ public partial class PlayerController : MonoBehaviour
 
     private void AttackObject(IDamageble damageble)
     {
-
-        Vector3 pointAttack = damageble.GetPoint();
-        float distance = Vector3.Distance(transform.position, pointAttack);
-        float moveShift = 0.1f;
-        if (distance <= battleStats.distanceToAttack)
-        {
-            battleComponent.AttackObject(damageble);
-        }
-        else
-        {
-            mover.MoveToPoint(Vector3.MoveTowards(pointAttack, transform.position, battleStats.distanceToAttack -moveShift));
-        }
-        
+        StartCoroutine(AttackCoroutine(damageble));     
     }
-
     private void InteractWithObject(IInteractable interactableObject)
     {   
-        float distanceToStop = 5f;
+        StartCoroutine(InteractCoroutine(interactableObject));  
+    }
 
-        if (!IsDialog) 
-        {
-            Vector3 pointInteract = interactableObject.GetPoint();
-            if (Vector3.Distance(transform.position, pointInteract) <= distanceToInteract)
-            {
-                interactableObject.Interact();
-            }
-            else
-            {
-               mover.MoveToPoint(Vector3.MoveTowards(pointInteract, transform.position, distanceToStop));
-            }
-        }
-        
+    IEnumerator AttackCoroutine(IDamageble damageble)
+    {
+        Vector3 positionAttack = damageble.GetPosition();
+        MoveForAttack(damageble);
+        yield return new WaitUntil(() 
+            => Vector3.Distance(transform.position, positionAttack) <= battleStats.distanceToAttack);
+        battleComponent.AttackObject(damageble);
+    }
+
+    private void MoveForAttack(IDamageble damageble)
+    {
+        Vector3 pointAttack = damageble.GetPosition();
+        float moveShift = 0.1f;
+        mover.MoveToPoint(Vector3.MoveTowards(pointAttack, transform.position, battleStats.distanceToAttack - moveShift));
     }
 
 
+    IEnumerator InteractCoroutine(IInteractable interactable)
+    {
+        Vector3 positionInteract = interactable.GetPosition();
+
+        MoveForInteract(interactable);
+        yield return new WaitUntil(()
+            => Vector3.Distance(transform.position, positionInteract) <= distanceToInteract);
+        interactable.Interact();
+    }
+
+    private void MoveForInteract(IInteractable interactable)
+    {
+        Vector3 positionInteract = interactable.GetPosition();
+        float moveShift = 0.1f;
+        mover.MoveToPoint(Vector3.MoveTowards(positionInteract, transform.position, distanceToInteract - moveShift));
+    }
 }
 

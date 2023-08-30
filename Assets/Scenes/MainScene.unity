@@ -1211,6 +1211,7 @@ MonoBehaviour:
   panelText: {fileID: 952356874}
   panelChoises: {fileID: 1518789814}
   IsPlaying: 0
+  npc: {fileID: 0}
 --- !u!1001 &1207396606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1943,7 +1944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 21.3
+      value: -71.2
       objectReference: {fileID: 0}
     - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
       propertyPath: m_LocalRotation.w

@@ -14,7 +14,7 @@ public class NPC : SelectableObject, IInteractable
 
     public Queue<TextQuestStep> QuestTextQueue = new Queue<TextQuestStep>();   
     
-    public Vector3 GetPoint()
+    public Vector3 GetPosition()
     {
         return transform.position; 
     }
@@ -25,7 +25,7 @@ public class NPC : SelectableObject, IInteractable
         if (QuestTextQueue.Count > 0)
         {
             TextQuestStep textQUestStep = QuestTextQueue.Dequeue();
-            dialogUI.EnterDialogueMode(textQUestStep.questStep, textQUestStep.textAsset);
+            dialogUI.EnterDialogueMode(textQUestStep.questStep, textQUestStep.textAsset,this);
         }
         
         else 
@@ -47,6 +47,10 @@ public class NPC : SelectableObject, IInteractable
         else
         {
             HideQuestTip();
+            if (dialogUI.npc == this && dialogUI.IsPlaying)
+            {
+                dialogUI.ExitDialogueMode();
+            }
         }
 
 

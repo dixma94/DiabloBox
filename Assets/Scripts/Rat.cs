@@ -7,7 +7,7 @@ public class Rat : SelectableObject, IDamageble
 {
     public ObjectBattleStats battleStats;
 
-    public Vector3 GetPoint()
+    public Vector3 GetPosition()
     {
         return transform.position;
     }

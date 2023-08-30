@@ -21,6 +21,7 @@ public class NPCDialogUI : MonoBehaviour
     [SerializeField] private GameObject panelChoises = null;
     public Story story;
     public bool IsPlaying;
+    public NPC npc;
     // Start is called before the first frame update
 
     void Awake()
@@ -29,8 +30,9 @@ public class NPCDialogUI : MonoBehaviour
         RemoveChildren();
         Hide();
     }
-    public void EnterDialogueMode(QuestStep questStep, TextAsset textAsset)
+    public void EnterDialogueMode(QuestStep questStep, TextAsset textAsset, NPC npc)
     {
+        this.npc = npc;
         Show();
         story = new Story(textAsset.text);
         questStep?.FinishedQuestStep();
@@ -57,7 +59,7 @@ public class NPCDialogUI : MonoBehaviour
         
     }
 
-    private void ExitDialogueMode()
+    public void ExitDialogueMode()
     {
         playerController.IsDialog = false;
         Hide();
