@@ -10,6 +10,8 @@ public class MouseInput : MonoBehaviour, ImouseService
     public event Action<IDamageble> OnAttackableClick;
     public event Action<SelectableObject> OnObjectChanged;
 
+    [SerializeField] private Camera _camera;
+
     public static MouseInput instance { get; private set; }
     private void Awake()
     {
@@ -24,7 +26,7 @@ public class MouseInput : MonoBehaviour, ImouseService
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+        if (Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition),out hit, 100))
         {
             if (hit.collider.TryGetComponent(out SelectableObject selectable))
             {

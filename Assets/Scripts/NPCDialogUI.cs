@@ -18,7 +18,6 @@ public class NPCDialogUI : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Button buttonPrefab = null;
     [SerializeField] private GameObject panelText = null;
-    [SerializeField] private GameObject panelChoises = null;
     public Story story;
     public bool IsPlaying;
     public NPC npc;
@@ -123,18 +122,14 @@ public class NPCDialogUI : MonoBehaviour
         {
             Destroy(panelText.transform.GetChild(i).gameObject);
         }
-        childCount = panelChoises.transform.childCount;
-        for (int i = childCount - 1; i >= 0; --i)
-        {
-            Destroy(panelChoises.transform.GetChild(i).gameObject);
-        }
+
     }
     // Creates a button showing the choice text
     Button CreateChoiceView(string text)
     {
         // Creates the button from a prefab
         Button choice = Instantiate(buttonPrefab) as Button;
-        choice.transform.SetParent(panelChoises.transform, false);
+        choice.transform.SetParent(panelText.transform, false);
 
         // Gets the text from the button prefab
         TextMeshProUGUI choiceText = choice.GetComponentInChildren<TextMeshProUGUI>();
