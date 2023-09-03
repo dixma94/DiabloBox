@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MouseInput : MonoBehaviour
 {
@@ -25,14 +26,16 @@ public class MouseInput : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition),out hit, 100))
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-           
-            OnSelection?.Invoke(hit.collider.GetInstanceID());
-
-            if (Input.GetMouseButtonDown(0))
+            if (Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out hit, 100))
             {
-                OnClick?.Invoke(hit.collider.GetInstanceID(), hit.point);
+                OnSelection?.Invoke(hit.collider.GetInstanceID());
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    OnClick?.Invoke(hit.collider.GetInstanceID(), hit.point);
+                }
             }
         }
     }

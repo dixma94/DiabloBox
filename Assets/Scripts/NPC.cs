@@ -37,7 +37,7 @@ public class NPC : SelectableObject, IInteractable
 
     private void Update()
     {
-        float MaxRangeToPlayer = 20f;
+        float MaxRangeToPlayer = 10f;
         PlayerController player = FindPlayerInRange(MaxRangeToPlayer);
 
         if (player!=null)

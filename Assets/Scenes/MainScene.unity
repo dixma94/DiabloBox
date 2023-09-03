@@ -229,7 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b0cb85714d6c3444a8c370c75d76a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseInput: {fileID: 536223249}
   textMeshPro: {fileID: 1414654273}
 --- !u!1 &254854659
 GameObject:
@@ -363,6 +362,7 @@ Transform:
   - {fileID: 946168755}
   - {fileID: 119361118}
   - {fileID: 594425933}
+  - {fileID: 544242753}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -377,6 +377,10 @@ PrefabInstance:
       propertyPath: mouseInput
       value: 
       objectReference: {fileID: 536223249}
+    - target: {fileID: 8897766914716595024, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
+      propertyPath: tipUI
+      value: 
+      objectReference: {fileID: 155873178}
     - target: {fileID: 8897766914716595027, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -476,6 +480,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &544242752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 544242753}
+  - component: {fileID: 544242754}
+  m_Layer: 0
+  m_Name: SelectableObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &544242753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544242752}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 395263787}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &544242754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544242752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039b4b6e9862f65499c06c3befd872c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseInput: {fileID: 536223249}
 --- !u!1 &570942995
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +789,10 @@ PrefabInstance:
       propertyPath: mouseInput
       value: 
       objectReference: {fileID: 536223249}
+    - target: {fileID: 8897766914716595024, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
+      propertyPath: tipUI
+      value: 
+      objectReference: {fileID: 155873178}
     - target: {fileID: 8897766914716595027, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -868,6 +921,11 @@ Transform:
 --- !u!4 &946168755 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+  m_PrefabInstance: {fileID: 3516283214564623392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &946168756 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3516283215826413285, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
   m_PrefabInstance: {fileID: 3516283214564623392}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &952356874
@@ -1018,6 +1076,10 @@ PrefabInstance:
       value: SmithBox
       objectReference: {fileID: 0}
     - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: tipUI
+      value: 
+      objectReference: {fileID: 155873178}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
       propertyPath: NPCType
       value: 1
       objectReference: {fileID: 0}
@@ -1029,6 +1091,10 @@ PrefabInstance:
       propertyPath: NPC_Class
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 1582426103}
     - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
       propertyPath: defaultText
       value: 
@@ -1311,6 +1377,10 @@ PrefabInstance:
       propertyPath: mouseInput
       value: 
       objectReference: {fileID: 536223249}
+    - target: {fileID: 8897766914716595024, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
+      propertyPath: tipUI
+      value: 
+      objectReference: {fileID: 155873178}
     - target: {fileID: 8897766914716595027, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1667,6 +1737,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8897766914716595027, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
   m_PrefabInstance: {fileID: 8897766913412974366}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1582426103 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3516283215826413285, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+  m_PrefabInstance: {fileID: 1025628630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1709362577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1851,6 +1926,10 @@ PrefabInstance:
       propertyPath: mouseInput
       value: 
       objectReference: {fileID: 536223249}
+    - target: {fileID: 8897766914716595024, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
+      propertyPath: tipUI
+      value: 
+      objectReference: {fileID: 155873178}
     - target: {fileID: 8897766914716595027, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1913,9 +1992,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 395263787}
     m_Modifications:
     - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: tipUI
+      value: 
+      objectReference: {fileID: 155873178}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
       propertyPath: dialogUI
       value: 
       objectReference: {fileID: 1184644244}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 946168756}
     - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2041,6 +2128,10 @@ PrefabInstance:
       propertyPath: battleComponent
       value: 
       objectReference: {fileID: 993196253}
+    - target: {fileID: 3540764018055180583, guid: 648ba531aacbe4d40a091c6e72fde2d9, type: 3}
+      propertyPath: selectebleObjectsDictionary
+      value: 
+      objectReference: {fileID: 544242754}
     - target: {fileID: 3540764018254170014, guid: 648ba531aacbe4d40a091c6e72fde2d9, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2062,6 +2153,10 @@ PrefabInstance:
       propertyPath: mouseInput
       value: 
       objectReference: {fileID: 536223249}
+    - target: {fileID: 8897766914716595024, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
+      propertyPath: tipUI
+      value: 
+      objectReference: {fileID: 155873178}
     - target: {fileID: 8897766914716595027, guid: 24f99e076f6e9e24b97f9b2183d5553b, type: 3}
       propertyPath: m_RootOrder
       value: 0
