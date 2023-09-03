@@ -5,27 +5,18 @@ using UnityEngine;
 
 public class TipUI : MonoBehaviour
 {
-    [SerializeField] private MouseInput mouseInput;
+
     [SerializeField] private TextMeshProUGUI textMeshPro;
 
-    // Start is called before the first frame update
-    void Start()
+
+    public void ShowInfo(SelectableObject selectableObject)
     {
-        mouseInput.OnObjectChanged += MouseInput_OnIntercableObjectChanged;
+        gameObject.SetActive(true);
+        textMeshPro.text = selectableObject.info;
     }
-
-    private void MouseInput_OnIntercableObjectChanged(SelectableObject selectableObject)
+    public void Hide()
     {
-        if (selectableObject != null)
-        {
-            textMeshPro.text = selectableObject.info;
-            gameObject.SetActive(true);
-
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
 
     }
 }

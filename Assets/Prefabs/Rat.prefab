@@ -62,6 +62,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: RatBox
+  boxCollider: {fileID: 8897766914716595026}
+  visualSelected: {fileID: 8627311443045454985}
   battleStats: {fileID: 1643654403308343697}
 --- !u!114 &1643654403308343697
 MonoBehaviour:

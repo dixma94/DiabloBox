@@ -9,6 +9,7 @@ public class MouseInput : MonoBehaviour, ImouseService
     public event Action<IInteractable> OnObjectClick;
     public event Action<IDamageble> OnAttackableClick;
     public event Action<SelectableObject> OnObjectChanged;
+    public event Action<int> OnSelection;
 
     [SerializeField] private Camera _camera;
 
@@ -28,14 +29,8 @@ public class MouseInput : MonoBehaviour, ImouseService
         RaycastHit hit;
         if (Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition),out hit, 100))
         {
-            if (hit.collider.TryGetComponent(out SelectableObject selectable))
-            {
-                OnObjectChanged?.Invoke(selectable);
-            }
-            else
-            {
-                OnObjectChanged?.Invoke(null);
-            }
+           
+            OnSelection?.Invoke(hit.collider.GetInstanceID());
 
             if (Input.GetMouseButtonDown(0))
             {

@@ -7,6 +7,7 @@ public class NPC : SelectableObject, IInteractable
 
     [SerializeField] private GameObject questHint;
     [SerializeField] private NPCDialogUI dialogUI;
+    
 
     [Header("Config")]
     public TextAsset defaultText;

@@ -352,6 +352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: WizardBox
+  boxCollider: {fileID: 3516283215826413285}
+  visualSelected: {fileID: 3516283214347137197}
   questHint: {fileID: 3516283215968446688}
   dialogUI: {fileID: 0}
   defaultText: {fileID: 4900000, guid: 8122724e3e2f90e409cec9fe1d25390a, type: 3}
