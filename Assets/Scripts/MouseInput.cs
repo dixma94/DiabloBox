@@ -3,13 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseInput : MonoBehaviour, ImouseService
+public class MouseInput : MonoBehaviour
 {
-    public event Action<Vector3> OnEnvironmentClick;
-    public event Action<IInteractable> OnObjectClick;
-    public event Action<IDamageble> OnAttackableClick;
-    public event Action<SelectableObject> OnObjectChanged;
+
     public event Action<int> OnSelection;
+    public event Action<int, Vector3> OnClick;
 
     [SerializeField] private Camera _camera;
 
@@ -34,26 +32,8 @@ public class MouseInput : MonoBehaviour, ImouseService
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.TryGetComponent(out IInteractable interactable))
-                {
-                    OnObjectClick?.Invoke(interactable);
-                }
-                else if(hit.collider.TryGetComponent(out IDamageble attackable))
-                {
-                    OnAttackableClick?.Invoke(attackable);
-                }
-                else
-                {
-                    OnEnvironmentClick?.Invoke(hit.point);
-                }
+                OnClick?.Invoke(hit.collider.GetInstanceID(), hit.point);
             }
-
         }
-
-
-
-       
     }
-
- 
 }

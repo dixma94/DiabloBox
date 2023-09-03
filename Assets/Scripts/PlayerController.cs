@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
@@ -10,6 +11,7 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] private NPCDialogUI nPCDialogUI;
     [SerializeField] private PlayerMover mover;
     [SerializeField] private BattleComponent battleComponent;
+    [SerializeField] private SelectebleObjectsDictionary selectebleObjectsDictionary;
 
     public ObjectBattleStats battleStats;
 
@@ -19,10 +21,29 @@ public partial class PlayerController : MonoBehaviour
     private void Start()
     {
 
-        input.OnObjectClick += InteractWithObject;
-        input.OnAttackableClick += AttackObject; ;
+        input.OnClick += Click;
         IsDialog = false;
     }
+
+    private void Click(int objectID, Vector3 point)
+    {
+        if (selectebleObjectsDictionary.dictionary.TryGetValue(objectID, out SelectableObject newSelect))
+        {
+            if (newSelect is IInteractable)
+            {
+                InteractWithObject(newSelect as IInteractable);
+            }
+            if (newSelect is IDamageble)
+            {
+                AttackObject(newSelect as IDamageble);
+            }
+        }
+        else
+        {
+            mover.MoveToPoint(point);
+        }
+    }
+
 
     private void AttackObject(IDamageble damageble)
     {

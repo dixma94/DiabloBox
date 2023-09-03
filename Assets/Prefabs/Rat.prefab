@@ -64,6 +64,7 @@ MonoBehaviour:
   info: RatBox
   boxCollider: {fileID: 8897766914716595026}
   visualSelected: {fileID: 8627311443045454985}
+  tipUI: {fileID: 0}
   battleStats: {fileID: 1643654403308343697}
 --- !u!114 &1643654403308343697
 MonoBehaviour:
@@ -147,19 +148,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b7e84131213b22f4fa9d26b2bca76a68, type: 3}
   m_PrefabInstance: {fileID: 8897766914037524952}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8897766914520176590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8627311443045454985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a0ea3bcd0933824bb3b9eb0c9e4d864, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectableObject: {fileID: 8897766914716595024}
 --- !u!4 &9003133951490084403 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b7e84131213b22f4fa9d26b2bca76a68, type: 3}
