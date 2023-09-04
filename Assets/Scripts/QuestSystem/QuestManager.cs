@@ -21,6 +21,29 @@ public class QuestManager : MonoBehaviour
     {
         GameEventManager.instance.questEvents.onAdvanceQuest -= AdvanceQuest;
     }
+
+    private void Start()
+    {
+
+        foreach (Quest quest in questMap.Values)
+        {
+            // broadcast the initial state of all quests on startup
+            GameEventManager.instance.questEvents.QuestStateChange(quest);
+        }
+    }
+    private void Update()
+    {
+        // loop through ALL quests
+        foreach (Quest quest in questMap.Values)
+        {
+            // if we're now meeting the requirements, switch over to the CAN_START state
+            if (quest.state == QuestState.REQUIREMENTS_NOT_MET && CheckRequirementsMet(quest))
+            {
+                //quest.InstantiateCurrentQuestStep(this.transform);
+                ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
+            }
+        }
+    }
     private void ChangeQuestState(string id, QuestState state)
     {
         Quest quest = GetQuestById(id);
@@ -33,32 +56,24 @@ public class QuestManager : MonoBehaviour
     {
         Quest quest = GetQuestById(id);
 
-        // move on to the next step
         quest.MoveToNextStep();
 
-        // if there are more steps, instantiate the next one
         if (quest.CurrentStepExists())
         {
-            quest.InstantiateCurrentQuestStep(this.transform);
+            quest.InstantiateCurrentQuestStep();
         }
-        // if there are no more steps, then we've finished all of them for this quest
         else
         {
             ChangeQuestState(quest.info.id, QuestState.FINISHED);
-            Debug.Log("Finish");
+            FinishQuest(quest.info.id);
         }
     }
 
-
-    private void Start()
+    private void FinishQuest(string id)
     {
-
-        foreach (Quest quest in questMap.Values)
-        {
-            // broadcast the initial state of all quests on startup
-            GameEventManager.instance.questEvents.QuestStateChange(quest);
-        }
+        Debug.Log("Finish");
     }
+
     private bool CheckRequirementsMet(Quest quest)
     {
         // start true and prove to be false
@@ -76,19 +91,7 @@ public class QuestManager : MonoBehaviour
 
         return meetsRequirements;
     }
-    private void Update()
-    {
-        // loop through ALL quests
-        foreach (Quest quest in questMap.Values)
-        {
-            // if we're now meeting the requirements, switch over to the CAN_START state
-            if (quest.state == QuestState.REQUIREMENTS_NOT_MET && CheckRequirementsMet(quest))
-            {
-                quest.InstantiateCurrentQuestStep(this.transform);
-                ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
-            }
-        }
-    }
+
     private Dictionary<string, Quest> CreateQuestMap()
     {
         // loads all QuestInfoSO Scriptable Objects under the Assets/Resources/Quests folder

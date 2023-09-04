@@ -15,8 +15,8 @@ MonoBehaviour:
   <id>k__BackingField: FirstQuestSO
   displayName: FirstQuest
   questPrerequisites: []
-  questStepPrefabs:
-  - {fileID: 2220773675517475666, guid: ffe93215151b47f45b028c210ac6fbbd, type: 3}
-  - {fileID: 2220773675517475666, guid: 5d0c539ff7c741349941948ec26e712d, type: 3}
-  - {fileID: 2220773675517475666, guid: 525df04df91f02f4087d8bd8b811e48e, type: 3}
-  - {fileID: 2220773675517475666, guid: 98da7ac883595ae4599c9f26f27848b2, type: 3}
+  questStepPrefabs: []
+  QuestSteps:
+  - {fileID: 11400000, guid: 148d1cc1fc3706d44bffe1371bd6c9da, type: 2}
+  - {fileID: 11400000, guid: d0403e7fab40fb043a52aa5e31c712a5, type: 2}
+  - {fileID: 11400000, guid: c6d95bf1688185f419d110aeef53310b, type: 2}

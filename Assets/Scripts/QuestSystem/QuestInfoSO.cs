@@ -17,7 +17,7 @@ public class QuestInfoSO : ScriptableObject
     [Header("Steps")]
     public GameObject[] questStepPrefabs;
 
-    //[Header("Rewards")]
+    public TalkWithNPCQuestStepSO[] QuestSteps;
 
 
     // ensure the id is always the name of the Scriptable Object asset
@@ -28,4 +28,6 @@ public class QuestInfoSO : ScriptableObject
         UnityEditor.EditorUtility.SetDirty(this);
 #endif
     }
+
+
 }

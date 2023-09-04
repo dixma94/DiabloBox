@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class QuestStep: MonoBehaviour
+public abstract class QuestStep
 {
     private bool IsFinished = false;
     protected string questId;
@@ -19,7 +19,7 @@ public abstract class QuestStep: MonoBehaviour
         {
             IsFinished = true;
             GameEventManager.instance.questEvents.AdvanceQuest(questId);
-            Destroy(gameObject);
+
         }
     }
 }

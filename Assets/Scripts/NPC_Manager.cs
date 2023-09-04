@@ -17,7 +17,7 @@ public class NPC_Manager : MonoBehaviour
     public static NPC GetNpc(NPCType npcClass)
     {
        
-        return instance.NpcArray.FirstOrDefault(npc => npc.NPCType == npcClass);
+        return instance.NpcArray.FirstOrDefault(npc => npc.npcType == npcClass);
        
     }
 }

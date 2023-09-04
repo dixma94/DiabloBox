@@ -7,21 +7,21 @@ public class QuestEvents
     public event Action<string> onAdvanceQuest;
     public void AdvanceQuest(string id)
     {
-        if (onAdvanceQuest != null)
-        {
-            onAdvanceQuest(id);
-        }
+        onAdvanceQuest?.Invoke(id);
     }
 
 
     public event Action<Quest> onQuestStateChange;
     public void QuestStateChange(Quest quest)
     {
-        if (onQuestStateChange != null)
-        {
-            onQuestStateChange(quest);
-        }
+        onQuestStateChange?.Invoke(quest);
     }
 
+    public event Action<NPCType> onTalkWithNPCDone;
+
+    public void TalkWithNPC(NPCType npcType)
+    {
+        onTalkWithNPCDone?.Invoke(npcType);
+    }
 
 }

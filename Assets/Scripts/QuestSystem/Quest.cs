@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Quest 
 {
     public QuestInfoSO info;
-
     public QuestState state;
 
     private int currentQuestStepIndex;
+    private QuestStep[] questStepArray;
 
     public Quest(QuestInfoSO questinfo)
     {
@@ -16,6 +17,8 @@ public class Quest
         this.state = QuestState.REQUIREMENTS_NOT_MET;
         this.currentQuestStepIndex = 0;
 
+        questStepArray = new QuestStep[questinfo.QuestSteps.Length];
+        InstantiateCurrentQuestStep();
     }
 
     public void MoveToNextStep()
@@ -25,36 +28,21 @@ public class Quest
 
     public bool CurrentStepExists()
     {
-        return (currentQuestStepIndex < info.questStepPrefabs.Length);
+        return (currentQuestStepIndex < info.QuestSteps.Length);
     }
 
-    public void InstantiateCurrentQuestStep(Transform parentTransform)
+    public void InstantiateCurrentQuestStep()
     {
-        GameObject questStepPrefab = GetCurrentQuestStepPrefab();
-        if (questStepPrefab != null)
+        QuestStep step;
+        if (info.QuestSteps[currentQuestStepIndex] is TalkWithNPCQuestStepSO)
         {
-          QuestStep questStep =  Object.Instantiate<GameObject>(questStepPrefab, parentTransform)
-                  .GetComponent<QuestStep>();
-            questStep.InitializeQuestStep(info.id);
-           
+            TalkWithNPCQuestStepSO stepSO = info.QuestSteps[currentQuestStepIndex];
+            step = new TalkNPCQuestStep(info.QuestSteps[currentQuestStepIndex].textForDialogue, stepSO.npcType);
+            step.InitializeQuestStep(info.id);          
         }
+
+
     }
 
-    private GameObject GetCurrentQuestStepPrefab()
-    {
 
-
-        GameObject questStepPrefab = null;
-
-        if (CurrentStepExists())
-        {
-            questStepPrefab = info.questStepPrefabs[currentQuestStepIndex];
-        }
-        else
-        {
-            Debug.LogWarning("Tried to get quest step prefab, but stepIndex was out of range indicating that "
-                + "there's no current step: QuestId=" + info.id + ", stepIndex=" + currentQuestStepIndex);
-        }
-        return questStepPrefab;
-    }
 }

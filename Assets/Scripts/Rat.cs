@@ -18,6 +18,7 @@ public class Rat : SelectableObject, IDamageble
         if (battleStats.heath <= 0)
         {
             GameEventManager.instance.ratsEvents.RatKilled();
+            Diselect();
             Destroy(gameObject);
         }
     }

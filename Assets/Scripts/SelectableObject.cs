@@ -24,11 +24,9 @@ public class SelectableObject : MonoBehaviour
 
     public void Diselect()
     {
-        visualSelected.SetActive(false);
         tipUI.Hide();
+        visualSelected.SetActive(false);
+        
     }
-    private void OnDestroy()
-    {
-        Diselect();
-    }
+
 }
