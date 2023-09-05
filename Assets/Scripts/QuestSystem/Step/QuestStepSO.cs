@@ -2,5 +2,5 @@
 
 public class QuestStepSO: ScriptableObject
 {
-    public QuestStepType type;
+    public QuestStep questStep;
 }

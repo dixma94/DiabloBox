@@ -39,7 +39,6 @@ public class QuestManager : MonoBehaviour
             // if we're now meeting the requirements, switch over to the CAN_START state
             if (quest.state == QuestState.REQUIREMENTS_NOT_MET && CheckRequirementsMet(quest))
             {
-                //quest.InstantiateCurrentQuestStep(this.transform);
                 ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
             }
         }

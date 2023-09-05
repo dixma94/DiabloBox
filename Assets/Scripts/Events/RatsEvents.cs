@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RatsEvents 
+public class EnemyEvents 
 {
-    public event Action onRatKilled;
-    public void RatKilled()
+    public event Action<EnemyType> onEnemyKilled;
+    public void EnemyKilled(EnemyType enemyType)
     {
-        if (onRatKilled != null)
+        if (onEnemyKilled != null)
         {
-            onRatKilled();
+            onEnemyKilled(enemyType);
         }
     }
 }

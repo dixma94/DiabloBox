@@ -21,6 +21,8 @@ public class NPCDialogUI : MonoBehaviour
     public Story story;
     public bool IsPlaying;
     public NPCType npcType;
+    TalkWithNPCQuestStepSO so;
+
     // Start is called before the first frame update
 
     void Awake()
@@ -30,9 +32,18 @@ public class NPCDialogUI : MonoBehaviour
         Hide();
     }
 
-    public void EnterDialogueMode(TextAsset textAsset,NPCType npcType)
+    public void EnterDialogueMode(TextAsset textAsset, TalkWithNPCQuestStepSO so)
     {
-        this.npcType = npcType;
+        this.npcType = so.npcType;
+        this.so = so;
+        Show();
+        story = new Story(textAsset.text);
+        RefreshView();
+        IsPlaying = true;
+    }
+    public void EnterDialogueMode(TextAsset textAsset, NPCType type)
+    {
+        this.npcType = type;
         Show();
         story = new Story(textAsset.text);
         RefreshView();
@@ -53,7 +64,7 @@ public class NPCDialogUI : MonoBehaviour
 
     public void ExitDialogueMode()
     {
-        GameEventManager.instance.questEvents.TalkWithNPC(npcType);
+        GameEventManager.instance.questEvents.TalkWithNPC(so);
         playerController.IsDialog = false;
         Hide();
         IsPlaying = false;

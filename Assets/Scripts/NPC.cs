@@ -13,7 +13,7 @@ public class NPC : SelectableObject, IInteractable
     public TextAsset defaultText;
     public NPCType npcType;
 
-    public Queue<TextAsset> QuestTextQueue = new Queue<TextAsset>();   
+    public Queue<TalkWithNPCQuestStepSO> QuestTextQueue = new Queue<TalkWithNPCQuestStepSO>();   
     
     public Vector3 GetPosition()
     {
@@ -25,7 +25,8 @@ public class NPC : SelectableObject, IInteractable
 
         if (QuestTextQueue.Count > 0)
         {
-            dialogUI.EnterDialogueMode(QuestTextQueue.Dequeue(), this.npcType);
+            TalkWithNPCQuestStepSO so = QuestTextQueue.Dequeue();
+            dialogUI.EnterDialogueMode(so.textForDialogue,so);
         }
         
         else 

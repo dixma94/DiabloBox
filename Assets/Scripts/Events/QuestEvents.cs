@@ -17,11 +17,11 @@ public class QuestEvents
         onQuestStateChange?.Invoke(quest);
     }
 
-    public event Action<NPCType> onTalkWithNPCDone;
+    public event Action<TalkWithNPCQuestStepSO> onTalkWithNPCDone;
 
-    public void TalkWithNPC(NPCType npcType)
+    public void TalkWithNPC(TalkWithNPCQuestStepSO so)
     {
-        onTalkWithNPCDone?.Invoke(npcType);
+        onTalkWithNPCDone?.Invoke(so);
     }
 
 }

@@ -7,7 +7,7 @@ public class GameEventManager : MonoBehaviour
 {
     public static GameEventManager instance { get; private set; }
     public QuestEvents questEvents;
-    public RatsEvents ratsEvents;
+    public EnemyEvents enemyEvents;
     private void Awake()
     {
         if (instance != null)
@@ -19,6 +19,6 @@ public class GameEventManager : MonoBehaviour
         // initialize all events
 
         questEvents = new QuestEvents();
-        ratsEvents  = new RatsEvents(); 
+        enemyEvents  = new EnemyEvents(); 
     }
 }

@@ -33,15 +33,9 @@ public class Quest
 
     public void InstantiateCurrentQuestStep()
     {
-        QuestStep step;
-        if (info.QuestSteps[currentQuestStepIndex] is TalkWithNPCQuestStepSO)
-        {
-            TalkWithNPCQuestStepSO stepSO = info.QuestSteps[currentQuestStepIndex];
-            step = new TalkNPCQuestStep(info.QuestSteps[currentQuestStepIndex].textForDialogue, stepSO.npcType);
-            step.InitializeQuestStep(info.id);          
-        }
-
-
+        //questStepArray[currentQuestStepIndex] = info.QuestSteps[currentQuestStepIndex].questStep;
+        QuestStepSO so = info.QuestSteps[currentQuestStepIndex];
+        so.questStep.InitializeQuestStep(so,info.id);
     }
 
 

@@ -15,9 +15,7 @@ public class QuestInfoSO : ScriptableObject
     public QuestInfoSO[] questPrerequisites;
 
     [Header("Steps")]
-    public GameObject[] questStepPrefabs;
-
-    public TalkWithNPCQuestStepSO[] QuestSteps;
+    public QuestStepSO[] QuestSteps;
 
 
     // ensure the id is always the name of the Scriptable Object asset
