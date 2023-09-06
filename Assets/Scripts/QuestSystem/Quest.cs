@@ -9,16 +9,13 @@ public class Quest
     public QuestState state;
 
     private int currentQuestStepIndex;
-    private QuestStep[] questStepArray;
 
     public Quest(QuestInfoSO questinfo)
     {
         this.info = questinfo;
-        this.state = QuestState.REQUIREMENTS_NOT_MET;
+        this.state = QuestState.CAN_START;
         this.currentQuestStepIndex = 0;
 
-        questStepArray = new QuestStep[questinfo.QuestSteps.Length];
-        InstantiateCurrentQuestStep();
     }
 
     public void MoveToNextStep()
@@ -33,9 +30,11 @@ public class Quest
 
     public void InstantiateCurrentQuestStep()
     {
-        //questStepArray[currentQuestStepIndex] = info.QuestSteps[currentQuestStepIndex].questStep;
-        QuestStepSO so = info.QuestSteps[currentQuestStepIndex];
-        so.questStep.InitializeQuestStep(so,info.id);
+        if (state == QuestState.IN_PROGRESS)
+        {
+            QuestStepSO so = info.QuestSteps[currentQuestStepIndex];
+            so.questStep.InitializeQuestStep(so,info.id);
+        }
     }
 
 

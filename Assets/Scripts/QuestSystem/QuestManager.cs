@@ -9,45 +9,42 @@ public class QuestManager : MonoBehaviour
     private void Awake()
     {
         questMap = CreateQuestMap();
-
-
     }
+
     private void OnEnable()
     {
         GameEventManager.instance.questEvents.onAdvanceQuest += AdvanceQuest;
-
     }
+
     private void OnDisable()
     {
         GameEventManager.instance.questEvents.onAdvanceQuest -= AdvanceQuest;
     }
-
     private void Start()
     {
-
-        foreach (Quest quest in questMap.Values)
-        {
-            // broadcast the initial state of all quests on startup
-            GameEventManager.instance.questEvents.QuestStateChange(quest);
-        }
+        UpdateState();
     }
-    private void Update()
+
+    private void UpdateState()
     {
-        // loop through ALL quests
         foreach (Quest quest in questMap.Values)
         {
-            // if we're now meeting the requirements, switch over to the CAN_START state
-            if (quest.state == QuestState.REQUIREMENTS_NOT_MET && CheckRequirementsMet(quest))
+            if (quest.state == QuestState.CAN_START && CheckRequirementsMet(quest))
             {
                 ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
+                if (quest.CurrentStepExists())
+                {
+                    quest.InstantiateCurrentQuestStep();
+                }
             }
         }
     }
+
     private void ChangeQuestState(string id, QuestState state)
     {
         Quest quest = GetQuestById(id);
         quest.state = state;
-        GameEventManager.instance.questEvents.QuestStateChange(quest);
+       
     }
 
 
@@ -65,6 +62,7 @@ public class QuestManager : MonoBehaviour
         {
             ChangeQuestState(quest.info.id, QuestState.FINISHED);
             FinishQuest(quest.info.id);
+            UpdateState();
         }
     }
 

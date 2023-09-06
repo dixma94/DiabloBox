@@ -11,11 +11,6 @@ public class QuestEvents
     }
 
 
-    public event Action<Quest> onQuestStateChange;
-    public void QuestStateChange(Quest quest)
-    {
-        onQuestStateChange?.Invoke(quest);
-    }
 
     public event Action<TalkWithNPCQuestStepSO> onTalkWithNPCDone;
 
