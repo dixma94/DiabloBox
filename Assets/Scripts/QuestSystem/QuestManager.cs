@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+    public event Action<Quest> OnStartQuest;
+    public event Action<Quest> OnChangeStep;
     private Dictionary<string, Quest> questMap;
 
     private void Awake()
@@ -36,6 +39,8 @@ public class QuestManager : MonoBehaviour
                 {
                     quest.InstantiateCurrentQuestStep();
                 }
+                OnStartQuest?.Invoke(quest);
+
             }
         }
     }
@@ -57,6 +62,7 @@ public class QuestManager : MonoBehaviour
         if (quest.CurrentStepExists())
         {
             quest.InstantiateCurrentQuestStep();
+            OnChangeStep?.Invoke(quest);
         }
         else
         {

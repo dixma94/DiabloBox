@@ -36,6 +36,10 @@ public class Quest
             so.questStep.InitializeQuestStep(so,info.id);
         }
     }
+    public QuestStepSO GetCurrentStepSO()
+    {
+        return info.QuestSteps[currentQuestStepIndex];
+    }
 
 
 }
