@@ -63,8 +63,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: RatBox
   boxCollider: {fileID: 8897766914716595026}
-  visualSelected: {fileID: 8627311443045454985}
   tipUI: {fileID: 0}
+  visualSelected: {fileID: 8627311443045454985}
   battleStats: {fileID: 1643654403308343697}
 --- !u!114 &1643654403308343697
 MonoBehaviour:
@@ -78,7 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcbd3dc30e17fe44896c0780110bf958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heath: 10
+  health: 20
+  maxHealth: 20
   mana: 0
   distanceToAttack: 0
   damage: 0

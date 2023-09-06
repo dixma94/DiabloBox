@@ -14,12 +14,17 @@ public class Rat : SelectableObject, IDamageble
 
     public void TakeDamage(int damage)
     {
-        battleStats.heath-=damage;
-        if (battleStats.heath <= 0)
+        battleStats.health-=damage;
+        ShowInfo();
+        if (battleStats.health <= 0)
         {
             GameEventManager.instance.enemyEvents.EnemyKilled(EnemyType.Rat);
             Diselect();
             Destroy(gameObject);
         }
+    }
+    public override void ShowInfo()
+    {
+        tipUI.ShowInfoAboutEnemy(info, battleStats.health,battleStats.maxHealth);
     }
 }

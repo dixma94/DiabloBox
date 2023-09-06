@@ -7,9 +7,9 @@ public class SelectableObject : MonoBehaviour
 {
     public string info;
     public BoxCollider boxCollider;
+    public TipUI tipUI;
 
     [SerializeField] private GameObject visualSelected;
-    [SerializeField] TipUI tipUI;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class SelectableObject : MonoBehaviour
     public void Select()
     {
         visualSelected.SetActive(true);
-        tipUI.ShowInfo(this);
+        ShowInfo();
     }
 
     public void Diselect()
@@ -28,5 +28,10 @@ public class SelectableObject : MonoBehaviour
         visualSelected.SetActive(false);
         
     }
+    public virtual void ShowInfo()
+    {
+
+    }
 
 }
+

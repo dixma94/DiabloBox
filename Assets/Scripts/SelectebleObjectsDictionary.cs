@@ -20,6 +20,7 @@ public class SelectebleObjectsDictionary : MonoBehaviour
     {
         if (dictionary.TryGetValue(objectID, out SelectableObject newSelect))
         {
+
             if (currentSelect==null)
             {
                 currentSelect = newSelect;

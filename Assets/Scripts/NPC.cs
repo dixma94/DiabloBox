@@ -99,6 +99,10 @@ public class NPC : SelectableObject, IInteractable
         var targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);  
     }
+    public override void ShowInfo()
+    {
+        tipUI.ShowInfoAboutNPC(info);
+    }
 
 
 }
