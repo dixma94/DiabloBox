@@ -7,6 +7,7 @@ public class QuestManager : MonoBehaviour
 {
     public event Action<Quest> OnStartQuest;
     public event Action<Quest> OnChangeStep;
+    public event Action<Quest> OnFinishQuest;
     private Dictionary<string, Quest> questMap;
 
     private void Awake()
@@ -74,6 +75,7 @@ public class QuestManager : MonoBehaviour
 
     private void FinishQuest(string id)
     {
+        OnFinishQuest?.Invoke(GetQuestById(id));
         Debug.Log("Finish");
     }
 

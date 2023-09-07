@@ -29,14 +29,8 @@ public partial class PlayerController : MonoBehaviour
     {
         if (selectebleObjectsDictionary.dictionary.TryGetValue(objectID, out SelectableObject newSelect))
         {
-            if (newSelect is IInteractable)
-            {
-                InteractWithObject(newSelect as IInteractable);
-            }
-            if (newSelect is IDamageble)
-            {
-                AttackObject(newSelect as IDamageble);
-            }
+            InteractWithObject(newSelect);
+
         }
         else
         {
@@ -44,46 +38,34 @@ public partial class PlayerController : MonoBehaviour
         }
     }
 
-
-    private void AttackObject(IDamageble damageble)
-    {
-        StartCoroutine(AttackCoroutine(damageble));     
-    }
-    private void InteractWithObject(IInteractable interactableObject)
+    private void InteractWithObject(SelectableObject selectableObject)
     {   
-        StartCoroutine(InteractCoroutine(interactableObject));  
+        StartCoroutine(InteractCoroutine(selectableObject));  
     }
 
-    IEnumerator AttackCoroutine(IDamageble damageble)
+    IEnumerator InteractCoroutine(SelectableObject selectableObject)
     {
-        Vector3 positionAttack = damageble.GetPosition();
-        MoveForAttack(damageble);
-        yield return new WaitUntil(() 
-            => Vector3.Distance(transform.position, positionAttack) <= battleStats.distanceToAttack);
-        battleComponent.AttackObject(damageble);
+        Vector3 position = selectableObject.transform.position;
+        if (selectableObject.IsPlayerCanAttack())
+        {
+            MoveForInteract(position, battleStats.distanceToAttack);
+            yield return new WaitUntil(()
+                => Vector3.Distance(transform.position, position) <= battleStats.distanceToAttack);
+
+            battleComponent.AttackObject(selectableObject as IDamageble);
+        }
+        else
+        {
+            MoveForInteract(position, this.distanceToInteract);
+            yield return new WaitUntil(()
+                => Vector3.Distance(transform.position, position) <= this.distanceToInteract);
+
+            selectableObject.Interact(this);
+        }
+
     }
-
-    private void MoveForAttack(IDamageble damageble)
+    private void MoveForInteract(Vector3 positionInteract, float distanceToInteract)
     {
-        Vector3 pointAttack = damageble.GetPosition();
-        float moveShift = 0.1f;
-        mover.MoveToPoint(Vector3.MoveTowards(pointAttack, transform.position, battleStats.distanceToAttack - moveShift));
-    }
-
-
-    IEnumerator InteractCoroutine(IInteractable interactable)
-    {
-        Vector3 positionInteract = interactable.GetPosition();
-
-        MoveForInteract(interactable);
-        yield return new WaitUntil(()
-            => Vector3.Distance(transform.position, positionInteract) <= distanceToInteract);
-        interactable.Interact();
-    }
-
-    private void MoveForInteract(IInteractable interactable)
-    {
-        Vector3 positionInteract = interactable.GetPosition();
         float moveShift = 0.1f;
         mover.MoveToPoint(Vector3.MoveTowards(positionInteract, transform.position, distanceToInteract - moveShift));
     }

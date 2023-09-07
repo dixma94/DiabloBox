@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class NPC : SelectableObject, IInteractable
+public class NPC : SelectableObject
 {
 
     [SerializeField] private GameObject questHint;
@@ -20,7 +20,7 @@ public class NPC : SelectableObject, IInteractable
         return transform.position; 
     }
     
-    public void Interact()
+    public override void Interact(PlayerController player)
     {
 
         if (QuestTextQueue.Count > 0)
@@ -103,6 +103,7 @@ public class NPC : SelectableObject, IInteractable
     {
         tipUI.ShowInfoAboutNPC(info);
     }
+
 
 
 }

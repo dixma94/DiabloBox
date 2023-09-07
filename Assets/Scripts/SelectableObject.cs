@@ -28,10 +28,13 @@ public class SelectableObject : MonoBehaviour
         visualSelected.SetActive(false);
         
     }
-    public virtual void ShowInfo()
+    public virtual void ShowInfo(){}
+    
+    public virtual void Interact(PlayerController player) { }
+
+    public bool IsPlayerCanAttack()
     {
-
+        return this is IDamageble;
     }
-
 }
 

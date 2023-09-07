@@ -27,4 +27,10 @@ public class Rat : SelectableObject, IDamageble
     {
         tipUI.ShowInfoAboutEnemy(info, battleStats.health,battleStats.maxHealth);
     }
+
+    public override void Interact(PlayerController player)
+    {
+
+    }
+
 }

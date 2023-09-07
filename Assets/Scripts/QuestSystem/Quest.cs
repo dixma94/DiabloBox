@@ -40,6 +40,10 @@ public class Quest
     {
         return info.QuestSteps[currentQuestStepIndex];
     }
+    public int GetCurrentStepIndex()
+    {
+        return currentQuestStepIndex;
+    }
 
 
 }
