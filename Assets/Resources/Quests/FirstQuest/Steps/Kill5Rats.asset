@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465491e50451cb14482a53cee4526f67, type: 3}
   m_Name: Kill5Rats
   m_EditorClassIdentifier: 
+  StepInfo: Kill 5 RatBoxs
   enemyType: 0
   count: 5

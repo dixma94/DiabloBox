@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FirstQuestSO
   m_EditorClassIdentifier: 
   <id>k__BackingField: FirstQuestSO
+  QuestInfo: 'FIrst Quest:'
   displayName: FirstQuest
   questPrerequisites: []
   QuestSteps:

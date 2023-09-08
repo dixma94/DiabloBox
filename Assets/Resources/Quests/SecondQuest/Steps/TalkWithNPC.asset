@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec729117c35d9274290eb60ea16766d6, type: 3}
   m_Name: TalkWithNPC
   m_EditorClassIdentifier: 
+  StepInfo: Talk with wizard box
   npcType: 0
   textForDialogue: {fileID: 4900000, guid: a7cb271af64993e4582e3ac386cdadec, type: 3}

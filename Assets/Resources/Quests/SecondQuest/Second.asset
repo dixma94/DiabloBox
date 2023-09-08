@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Second
   m_EditorClassIdentifier: 
   <id>k__BackingField: Second
+  QuestInfo: 'Second Quest:'
   displayName: Second
   questPrerequisites:
   - {fileID: 11400000, guid: 20b926bdce4c8f44dbb3c91a12109603, type: 2}

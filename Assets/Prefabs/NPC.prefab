@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 3516283214696966035}
   - component: {fileID: 3516283214251444100}
   - component: {fileID: 3516283215826413285}
+  - component: {fileID: 1992313459435664924}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -311,12 +312,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: WizardBox
   boxCollider: {fileID: 3516283215826413285}
-  visualSelected: {fileID: 3516283214347137197}
   tipUI: {fileID: 0}
+  visualSelected: {fileID: 3516283214347137197}
   questHint: {fileID: 3516283215968446688}
   dialogUI: {fileID: 0}
+  agent: {fileID: 1992313459435664924}
+  spawnPoint: {fileID: 0}
   defaultText: {fileID: 4900000, guid: 8122724e3e2f90e409cec9fe1d25390a, type: 3}
-  NPCType: 0
+  npcType: 0
 --- !u!65 &3516283215826413285
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -330,6 +333,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.6044693, y: 4.8495326, z: 4.4416485}
   m_Center: {x: -0.06886101, y: 1.9247663, z: 0.19080448}
+--- !u!195 &1992313459435664924
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3516283215826413284}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &3516283215968446688
 GameObject:
   m_ObjectHideFlags: 0

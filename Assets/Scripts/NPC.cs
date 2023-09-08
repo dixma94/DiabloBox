@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
+
 public class NPC : SelectableObject
 {
 
     [SerializeField] private GameObject questHint;
     [SerializeField] private NPCDialogUI dialogUI;
-    
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private GameObject spawnPoint;
+     
+    private bool IsMoveToSpawnOnject = false;
 
     [Header("Config")]
     public TextAsset defaultText;
@@ -38,12 +44,23 @@ public class NPC : SelectableObject
     private void Update()
     {
         float MaxRangeToPlayer = 10f;
-        PlayerController player = FindPlayerInRange(MaxRangeToPlayer);
 
-        if (player!=null)
+        float MaxDistanceNpcCanGoAway = 15f;
+        if (Vector3.Distance(transform.position, spawnPoint.transform.position)> MaxDistanceNpcCanGoAway)
         {
-            RotateNpcToPlayer(player);
+            StartCoroutine(MoveToSpawnPoint());
+        }
+
+        if (IsPlayerInRange(MaxRangeToPlayer, out PlayerController player))
+        {
+            if (!IsMoveToSpawnOnject)
+            {
+                RotateNpcToPlayer(player);
+                MoveToPlayer(player);
+            }
             ShowHideQuestTip();
+
+
         }
         else
         {
@@ -57,18 +74,38 @@ public class NPC : SelectableObject
 
     }
 
-    private PlayerController FindPlayerInRange(float MaxRangeToPlayer)
+    private IEnumerator MoveToSpawnPoint()
+    {
+        IsMoveToSpawnOnject = true;
+        agent.destination = spawnPoint.transform.position;
+
+        float positonShift = 1f;
+        yield return new WaitUntil(()
+        => Vector3.Distance(transform.position, spawnPoint.transform.position) < positonShift);
+        IsMoveToSpawnOnject = false;
+
+    }
+
+    private void MoveToPlayer(PlayerController player)
+    {
+        float distanceToInteract = 4f;
+        agent.destination = Vector3.MoveTowards(player.transform.position, transform.position, distanceToInteract);
+    }
+
+    private bool IsPlayerInRange(float MaxRangeToPlayer, out PlayerController player)
     {
         Collider[] colliderArray = Physics.OverlapSphere(transform.position, MaxRangeToPlayer);
-        PlayerController player;
+        
         foreach (Collider collider in colliderArray)
         {
-            if (collider.TryGetComponent(out player))
+            if (collider.TryGetComponent(out PlayerController playerComponent))
             {
-                return player;
+                player = playerComponent;
+                return true;
             }
         }
-        return null;
+        player = null;
+        return false;
     }
 
     private void ShowHideQuestTip()

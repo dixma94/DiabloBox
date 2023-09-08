@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec729117c35d9274290eb60ea16766d6, type: 3}
   m_Name: TalkWithSmith
   m_EditorClassIdentifier: 
+  StepInfo: Talk with smith box
   npcType: 1
   textForDialogue: {fileID: 4900000, guid: 8bdbcf0654daa174c8442ce52e9520b4, type: 3}
