@@ -12,8 +12,11 @@ public class NPC : SelectableObject
     [SerializeField] private NPCDialogUI dialogUI;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private GameObject spawnPoint;
-     
+    [SerializeField] private WayPointNPC[] wayPointArray;
+      
+    private bool IsMoveToWaypoint = false;
     private bool IsMoveToSpawnOnject = false;
+    private int currentWaypointIndex = 0;
 
     [Header("Config")]
     public TextAsset defaultText;
@@ -43,10 +46,12 @@ public class NPC : SelectableObject
 
     private void Update()
     {
-        float MaxRangeToPlayer = 10f;
 
+
+        float MaxRangeToPlayer = 10f;
         float MaxDistanceNpcCanGoAway = 15f;
-        if (Vector3.Distance(transform.position, spawnPoint.transform.position)> MaxDistanceNpcCanGoAway)
+
+        if (Vector3.Distance(transform.position, spawnPoint.transform.position) > MaxDistanceNpcCanGoAway)
         {
             StartCoroutine(MoveToSpawnPoint());
         }
@@ -56,14 +61,21 @@ public class NPC : SelectableObject
             if (!IsMoveToSpawnOnject)
             {
                 RotateNpcToPlayer(player);
-                MoveToPlayer(player);
+                if (IsHaveQuest())
+                {
+                    MoveToPlayer(player);
+                    ShowHideQuestTip();
+                }
             }
-            ShowHideQuestTip();
-
 
         }
         else
         {
+            if (!IsMoveToWaypoint)
+            {
+                StartCoroutine(MoveToWayPoint());
+            }
+
             HideQuestTip();
             if (dialogUI.npcType == this.npcType && dialogUI.IsPlaying)
             {
@@ -72,6 +84,23 @@ public class NPC : SelectableObject
         }
 
 
+    }
+
+    private IEnumerator MoveToWayPoint()
+    {
+        IsMoveToWaypoint = true;
+        agent.destination = wayPointArray[currentWaypointIndex].transform.position;
+
+        yield return new WaitForSeconds(Random.Range(5,15));
+        if (currentWaypointIndex == wayPointArray.Length-1)
+        {
+            currentWaypointIndex = 0;
+        }
+        else
+        {
+            currentWaypointIndex++;
+        }
+        IsMoveToWaypoint = false;
     }
 
     private IEnumerator MoveToSpawnPoint()
@@ -110,7 +139,7 @@ public class NPC : SelectableObject
 
     private void ShowHideQuestTip()
     {
-        if (QuestTextQueue.Count > 0)
+        if (IsHaveQuest())
         {
             ShowQuestTip();
         }
@@ -118,6 +147,11 @@ public class NPC : SelectableObject
         {
             HideQuestTip();
         }
+    }
+
+    private bool IsHaveQuest()
+    {
+        return QuestTextQueue.Count > 0;
     }
 
     private void HideQuestTip()
