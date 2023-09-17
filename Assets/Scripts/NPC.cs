@@ -64,7 +64,11 @@ public class NPC : SelectableObject
                 if (IsHaveQuest())
                 {
                     MoveToPlayer(player);
-                    ShowHideQuestTip();
+                    ShowQuestTip();
+                }
+                else
+                {
+                    HideQuestTip();
                 }
             }
 
@@ -90,7 +94,11 @@ public class NPC : SelectableObject
     {
         IsMoveToWaypoint = true;
         agent.destination = wayPointArray[currentWaypointIndex].transform.position;
-
+        
+        float positonShift = 1f;
+        yield return new WaitUntil(()
+        => Vector3.Distance(transform.position, wayPointArray[currentWaypointIndex].transform.position) < positonShift);
+        
         yield return new WaitForSeconds(Random.Range(5,15));
         if (currentWaypointIndex == wayPointArray.Length-1)
         {
@@ -137,17 +145,7 @@ public class NPC : SelectableObject
         return false;
     }
 
-    private void ShowHideQuestTip()
-    {
-        if (IsHaveQuest())
-        {
-            ShowQuestTip();
-        }
-        else
-        {
-            HideQuestTip();
-        }
-    }
+  
 
     private bool IsHaveQuest()
     {

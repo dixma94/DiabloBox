@@ -3,25 +3,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public partial class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] private MouseInput input;
-    [SerializeField] private NPCDialogUI nPCDialogUI;
+
     [SerializeField] private PlayerMover mover;
     [SerializeField] private BattleComponent battleComponent;
-    [SerializeField] private SelectebleObjectsDictionary selectebleObjectsDictionary;
+
+    private SelectebleObjectsDictionary selectebleObjectsDictionary;
 
     public ObjectBattleStats battleStats;
 
     float distanceToInteract = 10f;
     public bool IsDialog;
 
+    [Inject]
+    public void Construct(MouseInput input, SelectebleObjectsDictionary selectebleObjectsDictionary)
+    {
+        input.OnClick += Click;
+        this.selectebleObjectsDictionary = selectebleObjectsDictionary;
+    }
+
     private void Start()
     {
-
-        input.OnClick += Click;
+        
         IsDialog = false;
     }
 

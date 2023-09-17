@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Zenject;
 
 public class NPCDialogUI : MonoBehaviour
 {
@@ -15,15 +15,21 @@ public class NPCDialogUI : MonoBehaviour
     private const string ACCEPT_QUEST_TAG = "AcceptQuest";
 
     [SerializeField] private TextMeshProUGUI dialogueTextPrefab;
-    [SerializeField] private PlayerController playerController;
     [SerializeField] private Button buttonPrefab = null;
     [SerializeField] private GameObject panelText = null;
     public Story story;
     public bool IsPlaying;
     public NPCType npcType;
+    private PlayerController playerController;
     TalkWithNPCQuestStepSO so;
 
     // Start is called before the first frame update
+
+    [Inject]
+    public void Construct(PlayerController playerController)
+    {
+        this.playerController = playerController;
+    }
 
     void Awake()
     {
