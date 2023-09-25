@@ -16,6 +16,7 @@ public partial class LocationInstaller : MonoInstaller
         BindFromInstance(tipUI);
         BindFromInstance(npcDialogUI);
         BindAsSingle<NpcFactory>();
+        BindAsSingle<EnemyFactory>();
         BindFromInstance(nPC_Manager);
         BindAsSingle<SelectebleObjectsDictionary>();
         BindHero();

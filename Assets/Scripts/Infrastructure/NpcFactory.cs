@@ -15,10 +15,6 @@ public class NpcFactory
         this.container = container;
     }
 
-    private void QuestEvents_onTalkWithNPCDone()
-    {
-        Debug.Log("sdasd");
-    }
 
     public void Load()
     {
