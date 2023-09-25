@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 public class QuestTipUI : MonoBehaviour
 {
-    private Dictionary<Quest,QuestUIText> QuestUITextMap;
-    [SerializeField] private QuestManager QuestManager;
+    private Dictionary<Quest, QuestUIText> QuestUITextMap;
+    private QuestManager questManager;
     [SerializeField] private QuestUIText prefabQuestText;
     [SerializeField] private GameObject panel;
+
+    [Inject] 
+    public void Construct(QuestManager questManager)
+    {
+        this.questManager = questManager;
+        this.questManager.OnStartQuest += QuestManager_OnStartQuest;
+        this.questManager.OnChangeStep += QuestManager_OnChangeStep;
+        this.questManager.OnFinishQuest += QuestManager_OnFinishQuest;
+    }
+
     private void Start()
     {
-        QuestManager.OnStartQuest += QuestManager_OnStartQuest;
-        QuestManager.OnChangeStep += QuestManager_OnChangeStep;
-        QuestManager.OnFinishQuest += QuestManager_OnFinishQuest;
+
         QuestUITextMap = new Dictionary<Quest, QuestUIText>();
 
     }

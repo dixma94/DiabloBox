@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 [CreateAssetMenu(fileName = "KillEnemy", menuName = "ScriptableObjects/QuestStepSO/ KillEnemy", order = 2)]
 public class KillEnemyQuestStepSO : QuestStepSO
@@ -19,15 +20,19 @@ public class KillEnemyQuestStep : QuestStep
     private EnemyType enemyType;
 
 
-    public override void InitializeQuestStep(QuestStepSO infoSO, string questId)
+
+
+
+    public override void InitializeQuestStep(QuestStepSO infoSO, string questId, GameEventManager gameEventManager)
     {
         base.questId = questId;
+        base.gameEventManager = gameEventManager;
         KillEnemyQuestStepSO so = infoSO as KillEnemyQuestStepSO;
 
         needToKill = so.count;
         enemyType = so.enemyType;
 
-        GameEventManager.instance.enemyEvents.onEnemyKilled += EnemyKilled;
+        base.gameEventManager.enemyEvents.onEnemyKilled += EnemyKilled;
     }
 
     private void EnemyKilled(EnemyType enemyType)

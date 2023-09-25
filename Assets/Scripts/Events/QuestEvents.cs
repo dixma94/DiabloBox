@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.UI;
 
 public class QuestEvents
 {
@@ -19,4 +20,10 @@ public class QuestEvents
         onTalkWithNPCDone?.Invoke(so);
     }
 
+    public event Action<TalkWithNPCQuestStepSO> onQuestStepForDialogueCreate;
+
+    public void QuestStepForDialogueCreate(TalkWithNPCQuestStepSO so)
+    {
+        onQuestStepForDialogueCreate?.Invoke(so);
+    }
 }

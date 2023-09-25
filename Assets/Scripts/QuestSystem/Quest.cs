@@ -28,12 +28,13 @@ public class Quest
         return (currentQuestStepIndex < info.QuestSteps.Length);
     }
 
-    public void InstantiateCurrentQuestStep()
+    public void InstantiateCurrentQuestStep(GameEventManager gameEventManager)
     {
         if (state == QuestState.IN_PROGRESS)
         {
             QuestStepSO so = info.QuestSteps[currentQuestStepIndex];
-            so.questStep.InitializeQuestStep(so,info.id);
+            so.InitializeQuestStepSO();
+            so.questStep.InitializeQuestStep(so,info.id, gameEventManager);
         }
     }
     public QuestStepSO GetCurrentStepSO()

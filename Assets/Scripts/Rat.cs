@@ -2,9 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Rat : SelectableObject, IDamageble
 {
+    private GameEventManager gameEventManager;
+
+    [Inject]
+    public void Construct(GameEventManager gameEventManager)
+    {
+        this.gameEventManager = gameEventManager;
+    }
     public ObjectBattleStats battleStats;
 
     public Vector3 GetPosition()
@@ -18,7 +26,7 @@ public class Rat : SelectableObject, IDamageble
         ShowInfo();
         if (battleStats.health <= 0)
         {
-            GameEventManager.instance.enemyEvents.EnemyKilled(EnemyType.Rat);
+            gameEventManager.enemyEvents.EnemyKilled(EnemyType.Rat);
             Diselect();
             Destroy(gameObject);
         }

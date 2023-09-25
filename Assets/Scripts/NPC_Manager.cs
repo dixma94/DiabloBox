@@ -2,22 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class NPC_Manager : MonoBehaviour
 {
-    [SerializeField] private NPC[] NpcArray;
+    public Dictionary<NPCType, NPC> NpcMap;
+    [SerializeField] private SpawnPoint[] SpawnPoints;
+    private SelectebleObjectsDictionary selectebleObjectsDictionary;
 
-    static NPC_Manager instance;
-
-    private void Awake()
+    [Inject]
+    public void Construct(NpcFactory factory, SelectebleObjectsDictionary selectebleObjectsDictionary, QuestManager questManager)
     {
-        instance = this; 
+        factory.Load();
+        this.selectebleObjectsDictionary = selectebleObjectsDictionary;
+        foreach (var spawnPoint in SpawnPoints)
+        {
+            NPC nPC = factory.Create(spawnPoint.npc_type, spawnPoint.transform.position);
+            nPC.wayPointArray = spawnPoint.wayPointNPCs;
+            nPC.spawnPoint = spawnPoint;
+            this.selectebleObjectsDictionary.AddToDictionary(nPC);
+        }
+        questManager.UpdateState();
     }
-
-    public static NPC GetNpc(NPCType npcClass)
+    public NPC GetNpc(NPCType npcClass)
+    {     
+        return NpcMap[npcClass];       
+    }
+    public void AddNPC(NPC npc)
     {
-       
-        return instance.NpcArray.FirstOrDefault(npc => npc.npcType == npcClass);
-       
+        NpcMap.Add(npc.npcType, npc);
     }
 }

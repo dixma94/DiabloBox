@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using UnityEngine;
+using Zenject;
 
 [CreateAssetMenu(fileName = "TalkWithNPC", menuName = "ScriptableObjects/QuestStepSO/TalkWithNPC", order = 1) ]
 public class TalkWithNPCQuestStepSO : QuestStepSO
@@ -7,11 +8,13 @@ public class TalkWithNPCQuestStepSO : QuestStepSO
     public NPCType npcType;
     public TextAsset textForDialogue;
 
-
-    private void OnValidate()
+    public override void InitializeQuestStepSO()
     {
+        base.InitializeQuestStepSO();
         questStep = new TalkNPCQuestStep();
+
     }
+
 }
 
 public class TalkNPCQuestStep : QuestStep
@@ -19,13 +22,16 @@ public class TalkNPCQuestStep : QuestStep
 
     TalkWithNPCQuestStepSO so;
 
-    public override void InitializeQuestStep(QuestStepSO infoSO, string questId)
+
+    public override void InitializeQuestStep(QuestStepSO infoSO, string questId,GameEventManager gameEventManager)
     {
         base.questId = questId;
+        base.gameEventManager = gameEventManager;
         so = infoSO as TalkWithNPCQuestStepSO;
 
-        NPC_Manager.GetNpc(so.npcType).QuestTextQueue.Enqueue(so);
-        GameEventManager.instance.questEvents.onTalkWithNPCDone += TalkWithNPCDone;
+        //nPC_Manager.GetNpc(so.npcType).QuestTextQueue.Enqueue(so);
+        base.gameEventManager.questEvents.QuestStepForDialogueCreate(so);
+        base.gameEventManager.questEvents.onTalkWithNPCDone += TalkWithNPCDone;
 
     }
 
@@ -34,7 +40,7 @@ public class TalkNPCQuestStep : QuestStep
         if (this.so == so)
         {
             FinishedQuestStep();
-            GameEventManager.instance.questEvents.onTalkWithNPCDone -= TalkWithNPCDone;
+            gameEventManager.questEvents.onTalkWithNPCDone -= TalkWithNPCDone;
         }
     }
 }

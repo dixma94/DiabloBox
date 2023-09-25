@@ -2,34 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class QuestManager : MonoBehaviour
+public class QuestManager 
 {
     public event Action<Quest> OnStartQuest;
     public event Action<Quest> OnChangeStep;
     public event Action<Quest> OnFinishQuest;
     private Dictionary<string, Quest> questMap;
+    private GameEventManager gameEventManager;
 
-    private void Awake()
+    public QuestManager(GameEventManager gameEventManager)
     {
+        this.gameEventManager = gameEventManager;
+        this.gameEventManager.questEvents.onAdvanceQuest += AdvanceQuest;
         questMap = CreateQuestMap();
     }
 
-    private void OnEnable()
-    {
-        GameEventManager.instance.questEvents.onAdvanceQuest += AdvanceQuest;
-    }
 
-    private void OnDisable()
-    {
-        GameEventManager.instance.questEvents.onAdvanceQuest -= AdvanceQuest;
-    }
-    private void Start()
-    {
-        UpdateState();
-    }
 
-    private void UpdateState()
+    public void UpdateState()
     {
         foreach (Quest quest in questMap.Values)
         {
@@ -38,7 +30,7 @@ public class QuestManager : MonoBehaviour
                 ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
                 if (quest.CurrentStepExists())
                 {
-                    quest.InstantiateCurrentQuestStep();
+                    quest.InstantiateCurrentQuestStep(gameEventManager);
                 }
                 OnStartQuest?.Invoke(quest);
 
@@ -62,7 +54,7 @@ public class QuestManager : MonoBehaviour
 
         if (quest.CurrentStepExists())
         {
-            quest.InstantiateCurrentQuestStep();
+            quest.InstantiateCurrentQuestStep(gameEventManager);
             OnChangeStep?.Invoke(quest);
         }
         else

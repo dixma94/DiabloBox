@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7085155555460987666
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: info
+      value: SmithBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: tipUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: NPCType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: npcType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: dialogUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: NPC_Class
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 5953722991318883831}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: defaultText
+      value: 
+      objectReference: {fileID: 4900000, guid: 8cb6e0e7c9308e14cb877c67f6d1115f, type: 3}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: wayPointArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: wayPointArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: wayPointArray.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214251444100, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: wayPointArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283214696966035, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516283215826413284, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+      propertyPath: m_Name
+      value: NPC_Smith
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+--- !u!65 &5953722991318883831 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3516283215826413285, guid: cb5e28691ead09a4d91a90d0f265e5a5, type: 3}
+  m_PrefabInstance: {fileID: 7085155555460987666}
+  m_PrefabAsset: {fileID: 0}

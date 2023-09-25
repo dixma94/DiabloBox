@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+using static UnityEditor.Progress;
 
-public class SelectebleObjectsDictionary : MonoBehaviour
+public class SelectebleObjectsDictionary 
 {
-    [SerializeField] private MouseInput mouseInput;
+
 
     public Dictionary<int,SelectableObject> dictionary = new Dictionary<int,SelectableObject>();
-
     private SelectableObject currentSelect = null;
 
-    private void Start()
+    public SelectebleObjectsDictionary(ImouseService input)
     {
+        input.OnSelection += MouseInput_OnSelection;
         CreateDictionary();
-        mouseInput.OnSelection += MouseInput_OnSelection;
     }
 
     private void MouseInput_OnSelection(int objectID)
@@ -45,10 +46,14 @@ public class SelectebleObjectsDictionary : MonoBehaviour
 
     private void CreateDictionary()
     {
-        SelectableObject[] selectableObjects = FindObjectsOfType<SelectableObject>();
+        SelectableObject[] selectableObjects = Object.FindObjectsOfType<SelectableObject>();
         foreach (SelectableObject item in selectableObjects)
         {
             dictionary.Add(item.boxCollider.GetInstanceID(), item);
         }
+    }
+    public void AddToDictionary(SelectableObject selectableObject)
+    {
+        dictionary.Add(selectableObject.boxCollider.GetInstanceID(), selectableObject);
     }
 }

@@ -2,14 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using Zenject;
 
 public class SelectableObject : MonoBehaviour
 {
     public string info;
     public BoxCollider boxCollider;
-    public TipUI tipUI;
-
     [SerializeField] private GameObject visualSelected;
+    protected TipUI tipUI;
+
+    [Inject]
+    public void Construct(TipUI tipUI)
+    {
+        this.tipUI = tipUI;
+    }
 
     private void Start()
     {

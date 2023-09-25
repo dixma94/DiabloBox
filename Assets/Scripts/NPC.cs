@@ -4,23 +4,41 @@ using System.Drawing;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
+using Zenject;
 
 public class NPC : SelectableObject
 {
 
     [SerializeField] private GameObject questHint;
-    [SerializeField] private NPCDialogUI dialogUI;
     [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private GameObject spawnPoint;
-    [SerializeField] private WayPointNPC[] wayPointArray;
-      
-    private bool IsMoveToWaypoint = false;
-    private bool IsMoveToSpawnOnject = false;
-    private int currentWaypointIndex = 0;
 
     [Header("Config")]
     public TextAsset defaultText;
     public NPCType npcType;
+    public SpawnPoint spawnPoint { get; set; }
+    public WayPointNPC[] wayPointArray { get; set; }
+   
+    private bool IsMoveToWaypoint = false;
+    private bool IsMoveToSpawnOnject = false;
+    private int currentWaypointIndex = 0;
+    private NPCDialogUI dialogUI;
+    private GameEventManager gameEventManager;
+
+    [Inject]
+    public void Construct(NPCDialogUI dialogUI, GameEventManager gameEventManager)
+    { 
+        this.dialogUI = dialogUI;
+        this.gameEventManager = gameEventManager;
+        this.gameEventManager.questEvents.onQuestStepForDialogueCreate += AddQuestText;
+    }
+
+    private void AddQuestText(TalkWithNPCQuestStepSO so)
+    {   
+        if(so.npcType == npcType)
+        {
+            QuestTextQueue.Enqueue(so);
+        }
+    }
 
     public Queue<TalkWithNPCQuestStepSO> QuestTextQueue = new Queue<TalkWithNPCQuestStepSO>();   
     
@@ -43,6 +61,8 @@ public class NPC : SelectableObject
             dialogUI.EnterDialogueMode(defaultText,npcType);
         }
     }
+
+
 
     private void Update()
     {
@@ -132,7 +152,7 @@ public class NPC : SelectableObject
     private bool IsPlayerInRange(float MaxRangeToPlayer, out PlayerController player)
     {
         Collider[] colliderArray = Physics.OverlapSphere(transform.position, MaxRangeToPlayer);
-        
+
         foreach (Collider collider in colliderArray)
         {
             if (collider.TryGetComponent(out PlayerController playerComponent))

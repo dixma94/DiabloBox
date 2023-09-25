@@ -20,15 +20,16 @@ public class NPCDialogUI : MonoBehaviour
     public Story story;
     public bool IsPlaying;
     public NPCType npcType;
-    private PlayerController playerController;
     TalkWithNPCQuestStepSO so;
 
     // Start is called before the first frame update
 
+    private GameEventManager gameEventManager;
+
     [Inject]
-    public void Construct(PlayerController playerController)
+    public void Construct(GameEventManager gameEventManager)
     {
-        this.playerController = playerController;
+        this.gameEventManager = gameEventManager;
     }
 
     void Awake()
@@ -40,27 +41,34 @@ public class NPCDialogUI : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset textAsset, TalkWithNPCQuestStepSO so)
     {
-        this.npcType = so.npcType;
-        this.so = so;
-        Show();
-        story = new Story(textAsset.text);
-        RefreshView();
-        IsPlaying = true;
+        if (!IsPlaying) 
+        {
+            this.npcType = so.npcType;
+            this.so = so;
+            Show();
+            story = new Story(textAsset.text);
+            RefreshView();
+            IsPlaying = true;
+        }
+
     }
     public void EnterDialogueMode(TextAsset textAsset, NPCType type)
     {
-        this.npcType = type;
-        Show();
-        story = new Story(textAsset.text);
-        RefreshView();
-        IsPlaying = true;
+        if (!IsPlaying)
+        {
+            this.npcType = type;
+            Show();
+            story = new Story(textAsset.text);
+            RefreshView();
+            IsPlaying = true;
+        }
     }
 
 
     private void Show()
     {
         gameObject.SetActive(true);
-        playerController.IsDialog = true;
+
     }
     private void Hide()
     {
@@ -70,8 +78,8 @@ public class NPCDialogUI : MonoBehaviour
 
     public void ExitDialogueMode()
     {
-        GameEventManager.instance.questEvents.TalkWithNPC(so);
-        playerController.IsDialog = false;
+        gameEventManager.questEvents.TalkWithNPC(so);
+
         Hide();
         IsPlaying = false;
     }

@@ -1,32 +1,42 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class LocationInstaller : MonoInstaller
-{
+public partial class LocationInstaller : MonoInstaller
+{ 
     public Transform StartPoint;
     public GameObject HeroPrefab;
-    public MouseInput mouseInput;
-    public SelectebleObjectsDictionary selectebleObjects;
+    public NPC_Manager nPC_Manager;
+    public TipUI tipUI;
+    public NPCDialogUI npcDialogUI;
 
     public override void InstallBindings()
     {
-        BindSelectebleObjects();
-        BindMouseInput();
+        BindLocationInstaller();
+        BindAsSingle<GameEventManager>();
+        BindFromInstance(tipUI);
+        BindFromInstance(npcDialogUI);
+        BindAsSingle<NpcFactory>();
+        BindFromInstance(nPC_Manager);
+        BindAsSingle<SelectebleObjectsDictionary>();
         BindHero();
+        BindAsSingle<QuestManager>();
+
+
+    }
+    private void BindFromInstance<T>(T instance)
+    {
+        Container.
+            Bind<T>().
+            FromInstance(instance).
+            AsSingle();
     }
 
-    private void BindMouseInput()
+
+    private void BindLocationInstaller()
     {
         Container
-            .Bind<MouseInput>()
-            .FromInstance(mouseInput)
-            .AsSingle();
-    }
-    private void BindSelectebleObjects()
-    {
-        Container
-            .Bind<SelectebleObjectsDictionary>()
-            .FromInstance(selectebleObjects)
+            .BindInterfacesTo<LocationInstaller>()
+            .FromInstance(this)
             .AsSingle();
     }
 
@@ -40,6 +50,15 @@ public class LocationInstaller : MonoInstaller
              .FromInstance(playerController)
              .AsSingle();
     }
+
+    private void BindAsSingle<T>()
+    {
+            Container
+            .Bind<T>()
+            .AsSingle();
+    }
+
+
 }
 
 

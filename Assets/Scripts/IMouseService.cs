@@ -3,8 +3,6 @@ using UnityEngine;
 
 public interface ImouseService 
 {
-    event Action<Vector3> OnEnvironmentClick;
-    event Action<IInteractable> OnObjectClick;
-    public event Action<IDamageble> OnAttackableClick;
-    event Action<SelectableObject> OnObjectChanged;
+    public event Action<int> OnSelection;
+    public event Action<int, Vector3> OnClick;
 }

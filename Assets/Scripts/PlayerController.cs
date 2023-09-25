@@ -17,20 +17,16 @@ public partial class PlayerController : MonoBehaviour
     public ObjectBattleStats battleStats;
 
     float distanceToInteract = 10f;
-    public bool IsDialog;
+
 
     [Inject]
-    public void Construct(MouseInput input, SelectebleObjectsDictionary selectebleObjectsDictionary)
+    public void Construct(ImouseService input, SelectebleObjectsDictionary selectebleObjectsDictionary)
     {
         input.OnClick += Click;
         this.selectebleObjectsDictionary = selectebleObjectsDictionary;
     }
 
-    private void Start()
-    {
-        
-        IsDialog = false;
-    }
+
 
     private void Click(int objectID, Vector3 point)
     {
