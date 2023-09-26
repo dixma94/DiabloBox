@@ -1,4 +1,4 @@
-﻿public interface IDataPersistence
+﻿public interface IDataSaveLoad
 {
     void LoadData(GameData data);
 

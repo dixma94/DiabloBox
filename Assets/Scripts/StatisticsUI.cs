@@ -2,23 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
-public class StatisticsUI : MonoBehaviour, IDataPersistence
+public class StatisticsUI : MonoBehaviour, IDataSaveLoad
 {
     [SerializeField] TextMeshProUGUI _textMeshPro;
+    [SerializeField] Button quitButton;
     private int RatsKilledCount;
+    private DataSaveLoadManager dataPersistenceManager;
+
     private void Start()
     {
         UpdateCount();
+        quitButton.onClick.AddListener(QuitGame);
 
     }
     [Inject]
-    public void Construct(GameEventManager gameEventManager)
+    public void Construct(GameEventManager gameEventManager, DataSaveLoadManager dataPersistenceManager)
     {
         gameEventManager.enemyEvents.onEnemyKilled += RatKilled;
+        this.dataPersistenceManager = dataPersistenceManager;
+        this.dataPersistenceManager.AddDataPersistance(this);
+        this.dataPersistenceManager.LoadGame();
     }
 
+
+    private void QuitGame()
+    {
+        this.dataPersistenceManager.SaveGame();
+        Application.Quit();
+    }
     private void RatKilled(EnemyType type)
     {
         RatsKilledCount++;

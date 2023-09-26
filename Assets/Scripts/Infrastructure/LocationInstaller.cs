@@ -21,7 +21,7 @@ public partial class LocationInstaller : MonoInstaller
         BindAsSingle<SelectebleObjectsDictionary>();
         BindHero();
         BindAsSingle<QuestManager>();
-
+        BindAsSingle<DataSaveLoadManager>();
 
 
     }
