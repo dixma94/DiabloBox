@@ -21,12 +21,5 @@ public class EnemyManager : MonoBehaviour
         }
         
     }
-    //public NPC GetNpc(NPCType npcClass)
-    //{
-    //    return NpcMap[npcClass];
-    //}
-    //public void AddNPC(NPC npc)
-    //{
-    //    NpcMap.Add(npc.npcType, npc);
-    //}
+
 }

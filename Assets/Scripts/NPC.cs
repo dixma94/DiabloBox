@@ -15,9 +15,8 @@ public class NPC : SelectableObject
     [Header("Config")]
     public TextAsset defaultText;
     public NPCType npcType;
-    public SpawnPoint spawnPoint { get; set; }
-    public WayPointNPC[] wayPointArray { get; set; }
-   
+
+    private SpawnPoint spawnPoint;
     private bool IsMoveToWaypoint = false;
     private bool IsMoveToSpawnOnject = false;
     private int currentWaypointIndex = 0;
@@ -113,14 +112,14 @@ public class NPC : SelectableObject
     private IEnumerator MoveToWayPoint()
     {
         IsMoveToWaypoint = true;
-        agent.destination = wayPointArray[currentWaypointIndex].transform.position;
+        agent.destination = spawnPoint.wayPointNPCs[currentWaypointIndex].transform.position;
         
         float positonShift = 1f;
         yield return new WaitUntil(()
-        => Vector3.Distance(transform.position, wayPointArray[currentWaypointIndex].transform.position) < positonShift);
+        => Vector3.Distance(transform.position, spawnPoint.wayPointNPCs[currentWaypointIndex].transform.position) < positonShift);
         
         yield return new WaitForSeconds(Random.Range(5,15));
-        if (currentWaypointIndex == wayPointArray.Length-1)
+        if (currentWaypointIndex == spawnPoint.wayPointNPCs.Length-1)
         {
             currentWaypointIndex = 0;
         }
@@ -193,6 +192,9 @@ public class NPC : SelectableObject
         tipUI.ShowInfoAboutNPC(info);
     }
 
-
+    public void SetSpawnPoint(SpawnPoint spawnPoint)
+    {
+        this.spawnPoint = spawnPoint;
+    }
 
 }

@@ -23,6 +23,7 @@ public partial class LocationInstaller : MonoInstaller
         BindAsSingle<QuestManager>();
 
 
+
     }
     private void BindFromInstance<T>(T instance)
     {
