@@ -9,48 +9,44 @@ public class DataSaveLoadManager
 
     private string FileName = "data.json";
     private GameData GameData;
-    private List<IDataSaveLoad> DataPersistenceList;
+    private List<IDataSave> DataObjectsList;
     private FileDataHandler FileDataHandler;
 
 
     public DataSaveLoadManager()
     {
         this.FileDataHandler = new FileDataHandler(Application.persistentDataPath, FileName);
-        DataPersistenceList = new List<IDataSaveLoad>();
-        
+        DataObjectsList = new List<IDataSave>();
+        CreateNewGameData();
     }
 
-    public void NewGame()
+
+    public GameData GetGameData()
     {
-        this.GameData = new GameData();
+        return GameData;
     }
 
-    public void LoadGame()
+    private void CreateNewGameData()
     {
         this.GameData = FileDataHandler.Load();
-        if(this.GameData == null)
+        if (this.GameData == null)
         {
-            Debug.Log("No data found");
-            NewGame();
+            this.GameData = new GameData();
         }
-        foreach (IDataSaveLoad item in DataPersistenceList)
-        {
-            item.LoadData(GameData);
-        }
-
     }
+
     public void SaveGame()
     {
-        foreach (IDataSaveLoad item in DataPersistenceList)
+        foreach (IDataSave item in DataObjectsList)
         {
             item.SaveData( ref GameData);
         }
         FileDataHandler.Save(GameData);
     }
 
-    public void AddDataPersistance(IDataSaveLoad dataPersistence)
+    public void AddSaveDataObject(IDataSave dataObject)
     {
-        DataPersistenceList.Add(dataPersistence);
+        DataObjectsList.Add(dataObject);
     } 
 
 }

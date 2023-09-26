@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class StatisticsUI : MonoBehaviour, IDataSaveLoad
+public class StatisticsUI : MonoBehaviour, IDataSave
 {
     [SerializeField] TextMeshProUGUI _textMeshPro;
     [SerializeField] Button quitButton;
@@ -23,8 +23,8 @@ public class StatisticsUI : MonoBehaviour, IDataSaveLoad
     {
         gameEventManager.enemyEvents.onEnemyKilled += RatKilled;
         this.dataPersistenceManager = dataPersistenceManager;
-        this.dataPersistenceManager.AddDataPersistance(this);
-        this.dataPersistenceManager.LoadGame();
+        RatsKilledCount = this.dataPersistenceManager.GetGameData().ratsKilled;
+        this.dataPersistenceManager.AddSaveDataObject(this);
     }
 
 
@@ -42,11 +42,6 @@ public class StatisticsUI : MonoBehaviour, IDataSaveLoad
     private void UpdateCount()
     {
         _textMeshPro.text = "Rats Killed = " + RatsKilledCount;
-    }
-
-    public void LoadData(GameData data)
-    {
-        this.RatsKilledCount = data.ratsKilled;
     }
 
     public void SaveData(ref GameData data)
