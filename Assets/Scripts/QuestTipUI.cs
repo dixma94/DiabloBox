@@ -30,8 +30,11 @@ public class QuestTipUI : MonoBehaviour
 
     private void QuestManager_OnFinishQuest(Quest quest)
     {
-        Destroy(QuestUITextMap[quest].gameObject);
-        QuestUITextMap.Remove(quest);
+        if (quest!=null && QuestUITextMap.ContainsKey(quest))
+        {
+            Destroy(QuestUITextMap[quest].gameObject);
+            QuestUITextMap.Remove(quest);
+        }
     }
 
     private void QuestManager_OnChangeStep(Quest quest)
