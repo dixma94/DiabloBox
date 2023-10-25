@@ -8,39 +8,24 @@ public class TalkWithNPCQuestStepSO : QuestStepSO
     public NPCType npcType;
     public TextAsset textForDialogue;
 
-    public override void InitializeQuestStepSO()
-    {
-        base.InitializeQuestStepSO();
-        questStep = new TalkNPCQuestStep();
-
-    }
-
-}
-
-public class TalkNPCQuestStep : QuestStep
-{
-
-    TalkWithNPCQuestStepSO so;
-
-
-    public override void InitializeQuestStep(QuestStepSO infoSO, string questId,GameEventManager gameEventManager)
+    public override void InitializeQuestStep( string questId, GameEventManager gameEventManager)
     {
         base.questId = questId;
         base.gameEventManager = gameEventManager;
-        so = infoSO as TalkWithNPCQuestStepSO;
-
-        //nPC_Manager.GetNpc(so.npcType).QuestTextQueue.Enqueue(so);
-        base.gameEventManager.questEvents.QuestStepForDialogueCreate(so);
+        base.gameEventManager.questEvents.QuestStepForDialogueCreate(this);
         base.gameEventManager.questEvents.onTalkWithNPCDone += TalkWithNPCDone;
 
     }
 
     private void TalkWithNPCDone(TalkWithNPCQuestStepSO so)
     {
-        if (this.so == so)
+        if (this == so)
         {
             FinishedQuestStep();
             gameEventManager.questEvents.onTalkWithNPCDone -= TalkWithNPCDone;
         }
     }
+
 }
+
+

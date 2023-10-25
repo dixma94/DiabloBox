@@ -17,7 +17,7 @@ MonoBehaviour:
   displayName: FirstQuest
   questPrerequisites: []
   QuestSteps:
-  - {fileID: 11400000, guid: 148d1cc1fc3706d44bffe1371bd6c9da, type: 2}
+  - {fileID: 11400000, guid: 7f0a436d25ce9734da7947f6aebe1e2f, type: 2}
   - {fileID: 11400000, guid: d0403e7fab40fb043a52aa5e31c712a5, type: 2}
-  - {fileID: 11400000, guid: 1cad9923494c7f1488099bf51d9debc6, type: 2}
-  - {fileID: 11400000, guid: c6d95bf1688185f419d110aeef53310b, type: 2}
+  - {fileID: 11400000, guid: 6b218a747c8e26148b64cdaf8909a997, type: 2}
+  - {fileID: 11400000, guid: 741d08737b6638b46a276429996eb187, type: 2}

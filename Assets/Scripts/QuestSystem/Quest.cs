@@ -33,8 +33,7 @@ public class Quest
         if (state == QuestState.IN_PROGRESS)
         {
             QuestStepSO so = info.QuestSteps[currentQuestStepIndex];
-            so.InitializeQuestStepSO();
-            so.questStep.InitializeQuestStep(so,info.id, gameEventManager);
+            so.InitializeQuestStep(info.id, gameEventManager);
         }
     }
     public QuestStepSO GetCurrentStepSO()

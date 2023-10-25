@@ -2,11 +2,26 @@
 
 public class QuestStepSO: ScriptableObject
 {
-    public QuestStep questStep;
     public string StepInfo;
 
-    public virtual void InitializeQuestStepSO()
+    private bool IsFinished = false;
+    protected string questId;
+    protected GameEventManager gameEventManager;
+
+
+    public virtual void InitializeQuestStep(string questId, GameEventManager gameEventManager)
     {
 
+
+    }
+    [ContextMenu("FinishedQuestStep")]
+    public void FinishedQuestStep()
+    {
+        if (!IsFinished)
+        {
+            IsFinished = true;
+            gameEventManager.questEvents.AdvanceQuest(questId);
+
+        }
     }
 }

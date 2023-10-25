@@ -5,33 +5,14 @@ using Zenject;
 public class KillEnemyQuestStepSO : QuestStepSO
 {
     public EnemyType enemyType;
-    public int count;
+    public int needToKill;
 
-    private void OnValidate()
-    {
-        questStep = new KillEnemyQuestStep();
-    }
-}
-
-public class KillEnemyQuestStep : QuestStep
-{
     private int killedCount;
-    private int needToKill;
-    private EnemyType enemyType;
 
-
-
-
-
-    public override void InitializeQuestStep(QuestStepSO infoSO, string questId, GameEventManager gameEventManager)
+    public override void InitializeQuestStep(string questId, GameEventManager gameEventManager)
     {
         base.questId = questId;
         base.gameEventManager = gameEventManager;
-        KillEnemyQuestStepSO so = infoSO as KillEnemyQuestStepSO;
-
-        needToKill = so.count;
-        enemyType = so.enemyType;
-
         base.gameEventManager.enemyEvents.onEnemyKilled += EnemyKilled;
     }
 
@@ -45,6 +26,6 @@ public class KillEnemyQuestStep : QuestStep
                 FinishedQuestStep();
             }
         }
-
     }
 }
+
