@@ -9,7 +9,7 @@ public partial class PlayerController : MonoBehaviour
 {
 
 
-    [SerializeField] private PlayerMover mover;
+    [SerializeField] private MoveComponent mover;
     [SerializeField] private BattleComponent battleComponent;
 
     private SelectebleObjectsDictionary selectebleObjectsDictionary;
