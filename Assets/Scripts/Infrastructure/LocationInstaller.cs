@@ -19,9 +19,10 @@ public partial class LocationInstaller : MonoInstaller
         BindAsSingle<EnemyFactory>();
         BindFromInstance(nPC_Manager);
         BindAsSingle<SelectebleObjectsDictionary>();
+        BindAsSingle<DataSaveLoadManager>();
+        BindAsSingle<SavePointsManager>();
         BindHero();
         BindAsSingle<QuestManager>();
-        BindAsSingle<DataSaveLoadManager>();
 
 
     }
@@ -44,8 +45,14 @@ public partial class LocationInstaller : MonoInstaller
 
     private void BindHero()
     {
+        SavePointsManager savePointsManager = Container.Resolve<SavePointsManager>();
+        if (savePointsManager.currentSavePoint== Vector3.zero)
+        {
+            savePointsManager.currentSavePoint = StartPoint.position;
+        }
+
         PlayerController playerController = Container.
-             InstantiatePrefabForComponent<PlayerController>(HeroPrefab, StartPoint.position, Quaternion.identity, null);
+             InstantiatePrefabForComponent<PlayerController>(HeroPrefab, savePointsManager.currentSavePoint, Quaternion.identity, null);
 
         Container
              .Bind<PlayerController>()
