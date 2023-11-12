@@ -6,7 +6,7 @@ using Zenject;
 
 public class NPC_Manager : MonoBehaviour
 {
-    [SerializeField] private SpawnPoint[] SpawnPoints;
+    [SerializeField] private SpawnPointNPC[] SpawnPoints;
     private SelectebleObjectsDictionary selectebleObjectsDictionary;
 
     [Inject]

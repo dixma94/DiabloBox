@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnPoint : MonoBehaviour
+public class SpawnPointNPC : MonoBehaviour
 {
     public WayPointNPC[] wayPointNPCs;
     public NPCType npc_type;

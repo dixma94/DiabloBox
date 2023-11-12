@@ -8,16 +8,12 @@ using Zenject;
 public partial class PlayerController : MonoBehaviour
 {
 
+    public ObjectBattleStats battleStats;
 
     [SerializeField] private MoveComponent mover;
     [SerializeField] private BattleComponent battleComponent;
 
     private SelectebleObjectsDictionary selectebleObjectsDictionary;
-
-    public ObjectBattleStats battleStats;
-
-    float distanceToInteract = 10f;
-
 
     [Inject]
     public void Construct(ImouseService input, SelectebleObjectsDictionary selectebleObjectsDictionary)
@@ -59,9 +55,9 @@ public partial class PlayerController : MonoBehaviour
         }
         else
         {
-            MoveForInteract(position, this.distanceToInteract);
+            MoveForInteract(position, selectableObject.rangeToInteract);
             yield return new WaitUntil(()
-                => Vector3.Distance(transform.position, position) <= this.distanceToInteract);
+                => Vector3.Distance(transform.position, position) <= selectableObject.rangeToInteract);
 
             selectableObject.Interact(this);
         }

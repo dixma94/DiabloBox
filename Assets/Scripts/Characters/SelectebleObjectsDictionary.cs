@@ -14,7 +14,7 @@ public class SelectebleObjectsDictionary
     public SelectebleObjectsDictionary(ImouseService input)
     {
         input.OnSelection += MouseInput_OnSelection;
-        CreateDictionary();
+      
     }
 
     private void MouseInput_OnSelection(int objectID)
@@ -44,14 +44,7 @@ public class SelectebleObjectsDictionary
         }
     }
 
-    private void CreateDictionary()
-    {
-        SelectableObject[] selectableObjects = Object.FindObjectsOfType<SelectableObject>();
-        foreach (SelectableObject item in selectableObjects)
-        {
-            dictionary.Add(item.boxCollider.GetInstanceID(), item);
-        }
-    }
+
     public void AddToDictionary(SelectableObject selectableObject)
     {
         dictionary.Add(selectableObject.boxCollider.GetInstanceID(), selectableObject);

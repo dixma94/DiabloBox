@@ -7,21 +7,20 @@ using Zenject;
 public class SelectableObject : MonoBehaviour
 {
     public string info;
+    public float rangeToInteract;
     public BoxCollider boxCollider;
     [SerializeField] private GameObject visualSelected;
     protected TipUI tipUI;
+    
 
     [Inject]
     public void Construct(TipUI tipUI)
     {
         this.tipUI = tipUI;
-    }
-
-    private void Start()
-    {
         visualSelected.SetActive(false);
         tipUI.Hide();
     }
+
     public void Select()
     {
         visualSelected.SetActive(true);
@@ -34,7 +33,10 @@ public class SelectableObject : MonoBehaviour
         visualSelected.SetActive(false);
         
     }
-    public virtual void ShowInfo(){}
+    public virtual void ShowInfo()
+    {
+        tipUI.ShowInfoAboutNPC("BaseInfo");
+    }
     
     public virtual void Interact(PlayerController player) { }
 

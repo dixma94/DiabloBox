@@ -16,7 +16,7 @@ public class NPC : SelectableObject
     public TextAsset defaultText;
     public NPCType npcType;
 
-    private SpawnPoint spawnPoint;
+    private SpawnPointNPC spawnPoint;
     private bool IsMoveToWaypoint = false;
     private bool IsMoveToSpawnOnject = false;
     private int currentWaypointIndex = 0;
@@ -192,7 +192,7 @@ public class NPC : SelectableObject
         tipUI.ShowInfoAboutNPC(info);
     }
 
-    public void SetSpawnPoint(SpawnPoint spawnPoint)
+    public void SetSpawnPoint(SpawnPointNPC spawnPoint)
     {
         this.spawnPoint = spawnPoint;
     }
