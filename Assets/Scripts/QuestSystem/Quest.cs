@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Quest 
+[System.Serializable]
+public class Quest: IDataSave
 {
-    public QuestInfoSO info;
-    public QuestState state;
+    [SerializeField] public QuestInfoSO info;
+    [SerializeField] public QuestState state;
+    public DataSaveLoadManager dataSaveLoadManager;
 
-    private int currentQuestStepIndex;
+    [SerializeField] private int currentQuestStepIndex;
 
-    public Quest(QuestInfoSO questinfo)
+    public Quest(QuestInfoSO questinfo, DataSaveLoadManager dataSaveLoadManager)
     {
         this.info = questinfo;
         this.state = QuestState.CAN_START;
         this.currentQuestStepIndex = 0;
+        this.dataSaveLoadManager = dataSaveLoadManager;
+        dataSaveLoadManager.AddSaveDataObject(this);
 
     }
 
@@ -33,7 +37,7 @@ public class Quest
         if (state == QuestState.IN_PROGRESS)
         {
             QuestStepSO so = info.QuestSteps[currentQuestStepIndex];
-            so.InitializeQuestStep(info.id, gameEventManager);
+            so.InitializeQuestStep(info.id, gameEventManager,dataSaveLoadManager);
         }
     }
     public QuestStepSO GetCurrentStepSO()
@@ -45,5 +49,8 @@ public class Quest
         return currentQuestStepIndex;
     }
 
-
+    public void SaveData(ref GameData data)
+    {
+        data.AddQuestToSave(this);
+    }
 }

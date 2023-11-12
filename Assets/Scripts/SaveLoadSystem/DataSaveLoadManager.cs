@@ -23,6 +23,10 @@ public class DataSaveLoadManager
 
     public GameData GetGameData()
     {
+        if (this.GameData == null)
+        {
+            this.GameData = new GameData();
+        }
         return GameData;
     }
 

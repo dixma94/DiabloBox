@@ -5,13 +5,15 @@ public class QuestStepSO: ScriptableObject
     public string StepInfo;
 
     private bool IsFinished = false;
-    protected string questId;
+    private string questId;
     protected GameEventManager gameEventManager;
 
 
-    public virtual void InitializeQuestStep(string questId, GameEventManager gameEventManager)
+    public virtual void InitializeQuestStep(string questId, GameEventManager gameEventManager, DataSaveLoadManager dataSaveLoadManager)
     {
-
+        this.questId = questId;
+        this.IsFinished = false;
+        this.gameEventManager = gameEventManager;
 
     }
     [ContextMenu("FinishedQuestStep")]

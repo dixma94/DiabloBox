@@ -11,6 +11,7 @@ public class QuestTipUI : MonoBehaviour
     private QuestManager questManager;
     [SerializeField] private QuestUIText prefabQuestText;
     [SerializeField] private GameObject panel;
+    private bool isHaveData = false;
 
     [Inject] 
     public void Construct(QuestManager questManager)
@@ -19,13 +20,7 @@ public class QuestTipUI : MonoBehaviour
         this.questManager.OnStartQuest += QuestManager_OnStartQuest;
         this.questManager.OnChangeStep += QuestManager_OnChangeStep;
         this.questManager.OnFinishQuest += QuestManager_OnFinishQuest;
-    }
-
-    private void Start()
-    {
-
         QuestUITextMap = new Dictionary<Quest, QuestUIText>();
-
     }
 
     private void QuestManager_OnFinishQuest(Quest quest)
@@ -39,12 +34,13 @@ public class QuestTipUI : MonoBehaviour
 
     private void QuestManager_OnChangeStep(Quest quest)
     {
-        if (quest.GetCurrentStepIndex() == 1)
+        if (!isHaveData)
         {
             QuestUIText questUIText = Instantiate(prefabQuestText, panel.transform);
             QuestUITextMap.Add(quest, questUIText);
             questUIText.SetQuestText(quest.info.QuestInfo);
             questUIText.SetStepText(quest.GetCurrentStepSO().StepInfo);
+            isHaveData = true;
         }
         QuestUITextMap[quest].SetStepText(quest.GetCurrentStepSO().StepInfo);
 
@@ -52,14 +48,7 @@ public class QuestTipUI : MonoBehaviour
 
     private void QuestManager_OnStartQuest(Quest quest)
     {
-        if (quest.GetCurrentStepIndex()!=0)
-        {
-            QuestUIText questUIText = Instantiate(prefabQuestText, panel.transform);
-            QuestUITextMap.Add(quest, questUIText);
-            questUIText.SetQuestText(quest.info.QuestInfo);
-            questUIText.SetStepText(quest.GetCurrentStepSO().StepInfo);
-        }
-
+       
 
     }
 

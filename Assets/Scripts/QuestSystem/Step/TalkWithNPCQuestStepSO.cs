@@ -8,10 +8,9 @@ public class TalkWithNPCQuestStepSO : QuestStepSO
     public NPCType npcType;
     public TextAsset textForDialogue;
 
-    public override void InitializeQuestStep( string questId, GameEventManager gameEventManager)
+    public override void InitializeQuestStep( string questId, GameEventManager gameEventManager, DataSaveLoadManager dataSaveLoadManager)
     {
-        base.questId = questId;
-        base.gameEventManager = gameEventManager;
+        base.InitializeQuestStep(questId, gameEventManager, dataSaveLoadManager);
         base.gameEventManager.questEvents.QuestStepForDialogueCreate(this);
         base.gameEventManager.questEvents.onTalkWithNPCDone += TalkWithNPCDone;
 

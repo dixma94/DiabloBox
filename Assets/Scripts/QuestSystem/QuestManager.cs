@@ -11,11 +11,13 @@ public class QuestManager
     public event Action<Quest> OnFinishQuest;
     private Dictionary<string, Quest> questMap;
     private GameEventManager gameEventManager;
+    private DataSaveLoadManager dataSaveLoadManager;
 
-    public QuestManager(GameEventManager gameEventManager)
+    public QuestManager(GameEventManager gameEventManager, DataSaveLoadManager dataSaveLoadManager)
     {
         this.gameEventManager = gameEventManager;
         this.gameEventManager.questEvents.onAdvanceQuest += AdvanceQuest;
+        this.dataSaveLoadManager = dataSaveLoadManager;
         questMap = CreateQuestMap();
     }
 
@@ -25,6 +27,20 @@ public class QuestManager
     {
         foreach (Quest quest in questMap.Values)
         {
+            if (quest.state == QuestState.IN_PROGRESS)
+            {
+                if (quest.CurrentStepExists())
+                {
+                    quest.InstantiateCurrentQuestStep(gameEventManager);
+                    OnChangeStep?.Invoke(quest);
+                }
+                else
+                {
+                    ChangeQuestState(quest.info.id, QuestState.FINISHED);
+                    FinishQuest(quest.info.id);
+                    UpdateState();
+                }
+            }
             if (quest.state == QuestState.CAN_START && CheckRequirementsMet(quest))
             {
                 ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
@@ -91,19 +107,33 @@ public class QuestManager
 
     private Dictionary<string, Quest> CreateQuestMap()
     {
-        // loads all QuestInfoSO Scriptable Objects under the Assets/Resources/Quests folder
-        QuestInfoSO[] allQuests = Resources.LoadAll<QuestInfoSO>("Quests");
-        // Create the quest map
-        Dictionary<string, Quest> idToQuestMap = new Dictionary<string, Quest>();
-        foreach (QuestInfoSO questInfo in allQuests)
+
+        if (dataSaveLoadManager.GetGameData().quests.Count ==0)
         {
-            if (idToQuestMap.ContainsKey(questInfo.id))
+            // loads all QuestInfoSO Scriptable Objects under the Assets/Resources/Quests folder
+            QuestInfoSO[] allQuests = Resources.LoadAll<QuestInfoSO>("Quests");
+            // Create the quest map
+            Dictionary<string, Quest> idToQuestMap = new Dictionary<string, Quest>();
+            foreach (QuestInfoSO questInfo in allQuests)
             {
-                Debug.LogWarning("Duplicate ID found when creating quest map: " + questInfo.id);
+                if (idToQuestMap.ContainsKey(questInfo.id))
+                {
+                    Debug.LogWarning("Duplicate ID found when creating quest map: " + questInfo.id);
+                }
+                idToQuestMap.Add(questInfo.id, new Quest(questInfo, dataSaveLoadManager));
             }
-            idToQuestMap.Add(questInfo.id, new Quest(questInfo));
+            return idToQuestMap;
         }
-        return idToQuestMap;
+        else
+        {
+            Dictionary<string, Quest> idToQuestMap = new Dictionary<string, Quest>();
+            foreach (Quest quest in dataSaveLoadManager.GetGameData().quests)
+            {
+                idToQuestMap.Add(quest.info.id, quest);
+                quest.dataSaveLoadManager = dataSaveLoadManager;
+            }
+            return idToQuestMap;
+        }
     }
 
     private Quest GetQuestById(string id)

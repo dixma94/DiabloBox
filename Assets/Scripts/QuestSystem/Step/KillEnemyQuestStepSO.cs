@@ -6,22 +6,25 @@ public class KillEnemyQuestStepSO : QuestStepSO
 {
     public EnemyType enemyType;
     public int needToKill;
+    private DataSaveLoadManager dataSaveLoadManager;
 
-    private int killedCount;
-
-    public override void InitializeQuestStep(string questId, GameEventManager gameEventManager)
+    public override void InitializeQuestStep(string questId, GameEventManager gameEventManager, DataSaveLoadManager dataSaveLoadManager)
     {
-        base.questId = questId;
-        base.gameEventManager = gameEventManager;
+        base.InitializeQuestStep(questId, gameEventManager, dataSaveLoadManager);
         base.gameEventManager.enemyEvents.onEnemyKilled += EnemyKilled;
+        this.dataSaveLoadManager = dataSaveLoadManager;
+        if (dataSaveLoadManager.GetGameData().ratsKilled >= needToKill)
+        {
+            FinishedQuestStep();
+        }
     }
 
     private void EnemyKilled(EnemyType enemyType)
     {
         if (enemyType == this.enemyType)
         {
-            killedCount++;
-            if (killedCount >= needToKill)
+            dataSaveLoadManager.GetGameData().ratsKilled++;
+            if (dataSaveLoadManager.GetGameData().ratsKilled >= needToKill)
             {
                 FinishedQuestStep();
             }
